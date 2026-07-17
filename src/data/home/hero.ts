@@ -7,7 +7,7 @@ export const heroSlides: HeroSlide[] = [
     title: "Elevate Your Everyday Style",
     description:
       "Discover premium apparel crafted for comfort, confidence, and timeless fashion.",
-    image: "/images/hero/hero-1.jpg",
+    image: "/images/hero/hero-1.webp",
     ctaLabel: "Shop Collection",
     ctaHref: "/shop",
   },
@@ -17,7 +17,7 @@ export const heroSlides: HeroSlide[] = [
     title: "Modern Fashion. Local Excellence.",
     description:
       "Designed with quality fabrics and attention to every detail.",
-    image: "/images/hero/hero-2.jpg",
+    image: "/images/hero/hero-1.webp",
     ctaLabel: "Explore Products",
     ctaHref: "/shop",
   },
@@ -27,7 +27,7 @@ export const heroSlides: HeroSlide[] = [
     title: "Premium Looks For Every Occasion",
     description:
       "New arrivals inspired by contemporary trends and everyday elegance.",
-    image: "/images/hero/hero-3.jpg",
+    image: "/images/hero/hero-1.webp",
     ctaLabel: "View New Arrivals",
     ctaHref: "/shop",
   },

@@ -1,13 +1,13 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { siteConfig } from "../../../data/site";
 
 interface LoadingScreenProps {
-  isLoading?: boolean;
+  isLoading: boolean;
 }
 
 export function LoadingScreen({
-  isLoading = true,
+  isLoading,
 }: LoadingScreenProps) {
   return (
     <AnimatePresence>
@@ -35,14 +35,12 @@ export function LoadingScreen({
                 {siteConfig.brand.prefix}
               </h1>
 
-              <p className="text-lg text-muted-foreground tracking-[0.35em] uppercase">
+              <p className="text-lg tracking-[0.35em] uppercase text-muted-foreground">
                 {siteConfig.brand.suffix}
               </p>
             </motion.div>
 
-            <motion.div
-              className="h-1 w-40 overflow-hidden rounded-full bg-muted"
-            >
+            <motion.div className="h-1 w-40 overflow-hidden rounded-full bg-muted">
               <motion.div
                 className="h-full w-full bg-primary"
                 initial={{ x: "-100%" }}

@@ -6,8 +6,18 @@ import {
 } from "../../../data/navigation";
 
 import { MegaMenu } from "./MegaMenu";
+import { useHeaderTheme } from "./HeaderContext";
 
 export function Navigation() {
+  const { variant } = useHeaderTheme();
+
+  const isTransparent =
+    variant === "transparent";
+
+  const navClass = isTransparent
+    ? "text-white hover:text-white/70"
+    : "text-foreground hover:text-primary";
+
   return (
     <nav
       className="hidden items-center gap-8 lg:flex"
@@ -16,7 +26,10 @@ export function Navigation() {
       <div className="group relative">
         <Link
           to="/shop"
-          className="text-sm font-medium transition-colors duration-300 hover:text-primary"
+          className={[
+            "text-sm font-medium transition-colors duration-300",
+            navClass,
+          ].join(" ")}
         >
           Shop
         </Link>
@@ -28,7 +41,10 @@ export function Navigation() {
         <Link
           key={item.href}
           to={item.href}
-          className="text-sm font-medium transition-colors duration-300 hover:text-primary"
+          className={[
+            "text-sm font-medium transition-colors duration-300",
+            navClass,
+          ].join(" ")}
         >
           {item.label}
         </Link>

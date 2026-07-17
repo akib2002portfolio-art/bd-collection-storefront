@@ -1,69 +1,104 @@
 import { useEffect, useState } from "react";
+import { useRouterState } from "@tanstack/react-router";
+
 import { MobileMenu } from "../MobileMenu";
+import { SearchOverlay } from "../SearchOverlay";
+
 import { HeaderActions } from "./HeaderActions";
+import { HeaderProvider } from "./HeaderContext";
 import { Logo } from "./Logo";
 import { MobileToggle } from "./MobileToggle";
 import { Navigation } from "./Navigation";
-import { SearchOverlay } from "../SearchOverlay";
+
 export function Header() {
-    const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = useRouterState({
+    select: (state) => state.location.pathname,
+  });
 
-    // TODO: Connect to MobileMenu component
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const isHomePage = pathname === "/";
 
-    // TODO: Connect to SearchOverlay component
-    const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isScrolled, setIsScrolled] =
+    useState(false);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 20);
-        };
+  const [isMobileMenuOpen, setIsMobileMenuOpen] =
+    useState(false);
 
-        handleScroll();
+  const [isSearchOpen, setIsSearchOpen] =
+    useState(false);
 
-        window.addEventListener("scroll", handleScroll);
+  useEffect(() => {
+    const onScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
 
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
+    onScroll();
 
-    return (
-        <>
-            <header
-                className={[
-                    "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-                    isScrolled
-                        ? "border-b border-border/60 bg-background/80 shadow-sm backdrop-blur-xl"
-                        : "bg-transparent",
-                ].join(" ")}
-            >
-                <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-                    <Logo />
+    window.addEventListener("scroll", onScroll);
 
-                    <Navigation />
+    return () =>
+      window.removeEventListener(
+        "scroll",
+        onScroll
+      );
+  }, []);
 
-                    <div className="flex items-center gap-2">
-                        <HeaderActions
-                            onSearchClick={() => setIsSearchOpen(true)}
-                        />
+  const variant =
+    isHomePage && !isScrolled
+      ? "transparent"
+      : "solid";
 
-                        <MobileToggle
-                            onClick={() => setIsMobileMenuOpen(true)}
-                        />
-                    </div>
-                </div>
-            </header>
+  return (
+    <HeaderProvider
+      value={{
+        variant,
+        isScrolled,
+        isHomePage,
+      }}
+    >
+      <>
+        <header
+          className={[
+            "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+            variant === "transparent"
+              ? "bg-transparent"
+              : "border-b border-border/60 bg-background/90 shadow-sm backdrop-blur-xl",
+          ].join(" ")}
+        >
+          <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
+            <Logo />
 
-            <SearchOverlay
-                open={isSearchOpen}
-                onClose={() => setIsSearchOpen(false)}
-            />
+            <Navigation />
 
-            <MobileMenu
-                open={isMobileMenuOpen}
-                onClose={() => setIsMobileMenuOpen(false)}
-            />
-        </>
-    );
+            <div className="flex items-center gap-2">
+              <HeaderActions
+                onSearchClick={() =>
+                  setIsSearchOpen(true)
+                }
+              />
+
+              <MobileToggle
+                onClick={() =>
+                  setIsMobileMenuOpen(true)
+                }
+              />
+            </div>
+          </div>
+        </header>
+
+        <SearchOverlay
+          open={isSearchOpen}
+          onClose={() =>
+            setIsSearchOpen(false)
+          }
+        />
+
+        <MobileMenu
+          open={isMobileMenuOpen}
+          onClose={() =>
+            setIsMobileMenuOpen(false)
+          }
+        />
+      </>
+    </HeaderProvider>
+  );
 }

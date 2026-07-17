@@ -13,3 +13,25 @@ export const footerData = {
     subtitle: "Software Engineer • Portfolio",
   },
 };
+
+// src/data/footer.ts
+
+export const footerNavigation = [
+  {
+    title: "Shop",
+    links: [
+      { label: "New Arrival", href: "/shop?category=new-arrival" },
+      { label: "Men", href: "/shop?category=men" },
+      { label: "Women", href: "/shop?category=women" },
+      { label: "Kids", href: "/shop?category=kids" },
+      { label: "Accessories", href: "/shop?category=accessories" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About", href: "/about" },
+      { label: "Contact", href: "/contact" },
+    ],
+  },
+];

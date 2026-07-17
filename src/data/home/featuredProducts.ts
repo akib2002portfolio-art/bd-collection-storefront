@@ -1,0 +1,41 @@
+import type { ProductPreview } from "../../features/home/types/home";
+
+export const featuredProducts: ProductPreview[] = [
+  {
+    id: "oversized-black-tee",
+    name: "Oversized Black T-Shirt",
+    slug: "oversized-black-tshirt",
+    price: 1490,
+    thumbnail: "/images/products/placeholders/product-placeholder.jpg",
+    category: "Men",
+    isNew: true,
+  },
+  {
+    id: "premium-polo",
+    name: "Premium Polo Shirt",
+    slug: "premium-polo-shirt",
+    price: 1890,
+    salePrice: 1690,
+    thumbnail: "/images/products/placeholders/product-placeholder.jpg",
+    category: "Men",
+    isNew: false,
+  },
+  {
+    id: "linen-shirt",
+    name: "Linen Casual Shirt",
+    slug: "linen-casual-shirt",
+    price: 2290,
+    thumbnail: "/images/products/placeholders/product-placeholder.jpg",
+    category: "Men",
+    isNew: true,
+  },
+  {
+    id: "classic-panjabi",
+    name: "Classic Panjabi",
+    slug: "classic-panjabi",
+    price: 2790,
+    thumbnail: "/images/products/placeholders/product-placeholder.jpg",
+    category: "Men",
+    isNew: false,
+  },
+];
