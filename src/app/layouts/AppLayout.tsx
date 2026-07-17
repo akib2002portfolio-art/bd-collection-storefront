@@ -3,8 +3,6 @@ import type { PropsWithChildren } from "react";
 import { Header } from "../../components/layout/Header";
 import { Footer } from "../../components/layout/Footer";
 import { LoadingScreen } from "../../components/layout/LoadingScreen";
-import { MobileMenu } from "../../components/layout/MobileMenu";
-import { SearchOverlay } from "../../components/layout/SearchOverlay";
 
 export default function AppLayout({
   children,
@@ -22,9 +20,6 @@ export default function AppLayout({
 
         <Footer />
       </div>
-
-      <MobileMenu />
-      <SearchOverlay />
     </>
   );
 }
