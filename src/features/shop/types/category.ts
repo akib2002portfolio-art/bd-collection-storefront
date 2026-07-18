@@ -12,4 +12,5 @@ export interface Category {
   displayOrder: number;
 
   active: boolean;
+
 }

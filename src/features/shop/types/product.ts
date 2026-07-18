@@ -1,3 +1,5 @@
+export type ProductStatus = "draft" | "published";
+
 export interface Product {
   id: string;
 
@@ -5,21 +7,29 @@ export interface Product {
 
   slug: string;
 
+  sku: string;
+
+  categoryId: string;
+
   shortDescription: string;
 
   description: string;
 
+  imageUrl: string;
+
   price: number;
 
-  salePrice?: number;
-
-  categoryId: string;
+  stock: number;
 
   featured: boolean;
 
   newArrival: boolean;
 
-  active: boolean;
-
   displayOrder: number;
+
+  status: ProductStatus;
+
+  createdAt: string;
+
+  updatedAt: string;
 }
