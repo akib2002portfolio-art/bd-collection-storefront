@@ -1,10 +1,20 @@
 import { motion } from "framer-motion";
 
-import { featuredProducts } from "../../../../data/home/featuredProducts";
+import { useFeaturedProducts } from "../../../shop/hooks/useFeaturedProducts";
+import { mapProductsToPreview } from "../../utils/productPreviewMapper";
 
 import { ProductGrid } from "./ProductGrid";
 
 export function FeaturedProducts() {
+  const {
+    data: products = [],
+    isLoading,
+    isError,
+    error,
+  } = useFeaturedProducts();
+
+  const previewProducts = mapProductsToPreview(products);
+
   return (
     <section className="py-24">
       <div className="mx-auto max-w-7xl px-6">
@@ -27,12 +37,28 @@ export function FeaturedProducts() {
           </h2>
 
           <p className="mt-4 text-muted-foreground">
-            Discover our latest premium garments, carefully selected for quality,
-            comfort, and timeless style.
+            Discover our latest premium garments, carefully selected for
+            quality, comfort, and timeless style.
           </p>
         </motion.div>
 
-        <ProductGrid products={featuredProducts} />
+        {isLoading && (
+          <div className="py-16 text-center text-muted-foreground">
+            Loading featured products...
+          </div>
+        )}
+
+        {isError && (
+          <div className="py-16 text-center text-destructive">
+            {error instanceof Error
+              ? error.message
+              : "Failed to load featured products."}
+          </div>
+        )}
+
+        {!isLoading && !isError && (
+          <ProductGrid products={previewProducts} />
+        )}
       </div>
     </section>
   );
