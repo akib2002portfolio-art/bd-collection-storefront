@@ -16,6 +16,7 @@ export default function AppLayout({
   });
 
   const isHomePage = pathname === "/";
+  const isAdminRoute = pathname.startsWith("/admin");
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -29,21 +30,27 @@ export default function AppLayout({
     <>
       <LoadingScreen isLoading={isLoading} />
 
-      <div className="relative min-h-screen bg-background text-foreground">
-        <Header />
-
-        <main
-          className={
-            isHomePage
-              ? "flex-1"
-              : "flex-1 pt-20"
-          }
-        >
+      {isAdminRoute ? (
+        <main className="min-h-screen bg-background">
           {children}
         </main>
+      ) : (
+        <div className="relative min-h-screen bg-background text-foreground">
+          <Header />
 
-        <Footer />
-      </div>
+          <main
+            className={
+              isHomePage
+                ? "flex-1"
+                : "flex-1 pt-20"
+            }
+          >
+            {children}
+          </main>
+
+          <Footer />
+        </div>
+      )}
     </>
   );
 }
