@@ -2,10 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 
 import { productService } from "../services/productService";
 
-export function useProduct(slug: string) {
+export function useProducts() {
   return useQuery({
-    queryKey: ["product", slug],
-    queryFn: () => productService.getProductBySlug(slug),
-    enabled: Boolean(slug),
+    queryKey: ["products"],
+    queryFn: () => productService.getProducts(),
   });
 }
