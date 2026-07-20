@@ -7,16 +7,27 @@ type ProductRow = {
   name: string;
   slug: string;
   sku: string;
+
   category_id: string;
+
+  categories: {
+    name: string;
+  } | null;
+
   short_description: string;
   description: string;
   image_url: string;
+
   price: number;
   stock: number;
+
   featured: boolean;
   new_arrival: boolean;
+
   display_order: number;
+
   status: "draft" | "published";
+
   created_at: string;
   updated_at: string;
 };
@@ -28,16 +39,25 @@ class ProductService {
       name: row.name,
       slug: row.slug,
       sku: row.sku,
+
       categoryId: row.category_id,
+      categoryName: row.categories?.name ?? "Collection",
+
       shortDescription: row.short_description,
       description: row.description,
+
       imageUrl: row.image_url,
+
       price: row.price,
       stock: row.stock,
+
       featured: row.featured,
       newArrival: row.new_arrival,
+
       displayOrder: row.display_order,
+
       status: row.status,
+
       createdAt: row.created_at,
       updatedAt: row.updated_at,
     };
@@ -46,7 +66,12 @@ class ProductService {
   async getProducts(): Promise<Product[]> {
     const { data, error } = await supabase
       .from("products")
-      .select("*")
+      .select(`
+        *,
+        categories!products_category_id_fkey (
+          name
+        )
+      `)
       .eq("status", "published")
       .order("display_order", { ascending: true });
 
@@ -60,7 +85,12 @@ class ProductService {
   async getProductBySlug(slug: string): Promise<Product | null> {
     const { data, error } = await supabase
       .from("products")
-      .select("*")
+      .select(`
+        *,
+        categories!products_category_id_fkey (
+          name
+        )
+      `)
       .eq("slug", slug)
       .eq("status", "published")
       .maybeSingle();
@@ -79,7 +109,12 @@ class ProductService {
   async getFeaturedProducts(): Promise<Product[]> {
     const { data, error } = await supabase
       .from("products")
-      .select("*")
+      .select(`
+        *,
+        categories!products_category_id_fkey (
+          name
+        )
+      `)
       .eq("status", "published")
       .eq("featured", true)
       .order("display_order", { ascending: true });
@@ -94,7 +129,12 @@ class ProductService {
   async getNewArrivals(): Promise<Product[]> {
     const { data, error } = await supabase
       .from("products")
-      .select("*")
+      .select(`
+        *,
+        categories!products_category_id_fkey (
+          name
+        )
+      `)
       .eq("status", "published")
       .eq("new_arrival", true)
       .order("display_order", { ascending: true });

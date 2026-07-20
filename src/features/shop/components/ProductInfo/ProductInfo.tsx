@@ -10,8 +10,8 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
   return (
     <div className="flex flex-col">
-      <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
-        {product.categoryId ?? "Collection"}
+      <p className="text-sm font-medium uppercase tracking-[0.3em] text-muted-foreground">
+        {product.categoryName}
       </p>
 
       <h1 className="mt-3 text-4xl font-bold tracking-tight">
@@ -50,6 +50,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
         <p className="mt-4 leading-7 text-muted-foreground">
           {product.description ||
+            product.shortDescription ||
             "No description available."}
         </p>
       </div>

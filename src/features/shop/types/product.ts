@@ -11,6 +11,8 @@ export interface Product {
 
   categoryId: string;
 
+  categoryName: string;
+
   shortDescription: string;
 
   description: string;

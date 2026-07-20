@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-
+import { ProductBreadcrumb } from "../../features/shop/components/ProductBreadcrumb";
 import { ProductGallery } from "../../features/shop/components/ProductGallery";
 import { ProductInfo } from "../../features/shop/components/ProductInfo";
 import { useProduct } from "../../features/shop/hooks/useProduct";
@@ -42,15 +42,26 @@ function ProductDetailsPage() {
   }
 
   return (
-    <main className="container mx-auto px-4 py-12">
-      <div className="grid gap-12 lg:grid-cols-2">
+    <main className="container mx-auto max-w-7xl px-4 py-12">
+
+      <ProductBreadcrumb
+        categoryName={product.categoryName}
+        productName={product.name}
+      />
+
+      <div className="grid gap-16 lg:grid-cols-2">
+
         <ProductGallery
           productName={product.name}
           imageUrl={product.imageUrl}
         />
 
-        <ProductInfo product={product} />
+        <ProductInfo
+          product={product}
+        />
+
       </div>
+
     </main>
   );
 }
