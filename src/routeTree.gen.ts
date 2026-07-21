@@ -19,6 +19,7 @@ import { Route as AdminProductsRouteImport } from './routes/admin/products'
 import { Route as AdminNewProductRouteImport } from './routes/admin/new-product'
 import { Route as AdminNewCategoryRouteImport } from './routes/admin/new-category'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
+import { Route as AdminHomepageRouteImport } from './routes/admin/homepage'
 import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
 import { Route as AdminCategoriesRouteImport } from './routes/admin/categories'
 import { Route as AdminEditProductIdRouteImport } from './routes/admin/edit-product/$id'
@@ -74,6 +75,11 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminHomepageRoute = AdminHomepageRouteImport.update({
+  id: '/admin/homepage',
+  path: '/admin/homepage',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminDashboardRoute = AdminDashboardRouteImport.update({
   id: '/admin/dashboard',
   path: '/admin/dashboard',
@@ -99,6 +105,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/homepage': typeof AdminHomepageRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/new-category': typeof AdminNewCategoryRoute
   '/admin/new-product': typeof AdminNewProductRoute
@@ -115,6 +122,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/homepage': typeof AdminHomepageRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/new-category': typeof AdminNewCategoryRoute
   '/admin/new-product': typeof AdminNewProductRoute
@@ -132,6 +140,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/homepage': typeof AdminHomepageRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/new-category': typeof AdminNewCategoryRoute
   '/admin/new-product': typeof AdminNewProductRoute
@@ -150,6 +159,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin/categories'
     | '/admin/dashboard'
+    | '/admin/homepage'
     | '/admin/login'
     | '/admin/new-category'
     | '/admin/new-product'
@@ -166,6 +176,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin/categories'
     | '/admin/dashboard'
+    | '/admin/homepage'
     | '/admin/login'
     | '/admin/new-category'
     | '/admin/new-product'
@@ -182,6 +193,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin/categories'
     | '/admin/dashboard'
+    | '/admin/homepage'
     | '/admin/login'
     | '/admin/new-category'
     | '/admin/new-product'
@@ -199,6 +211,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminCategoriesRoute: typeof AdminCategoriesRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminHomepageRoute: typeof AdminHomepageRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminNewCategoryRoute: typeof AdminNewCategoryRoute
   AdminNewProductRoute: typeof AdminNewProductRoute
@@ -284,6 +297,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/homepage': {
+      id: '/admin/homepage'
+      path: '/admin/homepage'
+      fullPath: '/admin/homepage'
+      preLoaderRoute: typeof AdminHomepageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/dashboard': {
       id: '/admin/dashboard'
       path: '/admin/dashboard'
@@ -319,6 +339,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminCategoriesRoute: AdminCategoriesRoute,
   AdminDashboardRoute: AdminDashboardRoute,
+  AdminHomepageRoute: AdminHomepageRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminNewCategoryRoute: AdminNewCategoryRoute,
   AdminNewProductRoute: AdminNewProductRoute,

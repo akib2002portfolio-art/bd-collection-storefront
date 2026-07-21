@@ -1,19 +1,61 @@
-import { heroSlides } from "../../../../data/home/hero";
+import { useMemo } from "react";
 
 import { HeroBackground } from "./HeroBackground";
 import { HeroContent } from "./HeroContent";
 import { HeroControls } from "./HeroControls";
 import { useHeroSlider } from "./useHeroSlider";
 
+import { useHeroSlides } from "../../../homepage/hooks";
+import { mapHeroToStorefront } from "../../../homepage/utils/mapHeroToStorefront";
+
 export function Hero() {
+  const {
+    data,
+    isLoading,
+    isError,
+  } = useHeroSlides();
+
+  const heroSlides = useMemo(() => {
+    if (!data) return [];
+
+    return data
+      .filter((slide) => slide.isActive)
+      .sort(
+        (a, b) =>
+          a.displayOrder - b.displayOrder,
+      )
+      .map(mapHeroToStorefront);
+  }, [data]);
+
   const {
     currentIndex,
     goToSlide,
   } = useHeroSlider({
-    totalSlides: heroSlides.length,
+    totalSlides:
+      heroSlides.length > 0
+        ? heroSlides.length
+        : 1,
   });
 
-  const currentSlide = heroSlides[currentIndex];
+  if (isLoading) {
+    return (
+      <section className="relative flex min-h-screen items-center justify-center bg-black text-white">
+        <p className="text-white/70">
+          Loading homepage...
+        </p>
+      </section>
+    );
+  }
+
+  if (
+    isError ||
+    heroSlides.length === 0
+  ) {
+    return null;
+  }
+
+  const currentSlide =
+    heroSlides[currentIndex];
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-black text-white">

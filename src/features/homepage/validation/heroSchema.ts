@@ -26,10 +26,9 @@ export const heroSchema = z.object({
         .optional(),
 
     imageUrl: z
-        .string()
-        .trim()
-        .url("Invalid image URL")
-        .or(z.literal("")),
+    .string()
+    .trim()
+    .min(1, "Image is required"),
 
     displayOrder: z.number().int().min(0),
 

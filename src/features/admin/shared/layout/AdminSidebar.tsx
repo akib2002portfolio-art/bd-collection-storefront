@@ -1,6 +1,7 @@
 import {
   LayoutDashboard,
   Package,
+  Home,
   LogOut,
 } from "lucide-react";
 
@@ -19,6 +20,11 @@ const navItems = [
     href: "/admin/dashboard",
   },
   {
+    label: "Homepage",
+    icon: Home,
+    href: "/admin/homepage",
+  },
+  {
     label: "Products",
     icon: Package,
     href: "/admin/products",
@@ -35,15 +41,20 @@ export function AdminSidebar() {
   });
 
   function isActive(href: string) {
-    if (href === "/admin/products") {
-      return (
-        pathname.startsWith("/admin/products") ||
-        pathname.startsWith("/admin/new-product") ||
-        pathname.startsWith("/admin/edit-product")
-      );
-    }
+    switch (href) {
+      case "/admin/products":
+        return (
+          pathname.startsWith("/admin/products") ||
+          pathname.startsWith("/admin/new-product") ||
+          pathname.startsWith("/admin/edit-product")
+        );
 
-    return pathname === href;
+      case "/admin/homepage":
+        return pathname.startsWith("/admin/homepage");
+
+      default:
+        return pathname === href;
+    }
   }
 
   async function handleLogout() {

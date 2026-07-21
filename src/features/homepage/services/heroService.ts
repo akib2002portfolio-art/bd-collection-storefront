@@ -22,25 +22,25 @@ interface HeroRow {
 
 class HeroService {
   private mapHero(row: HeroRow): HeroSlide {
-    return {
-      id: row.id,
+  return {
+    id: row.id,
 
-      title: row.title,
-      subtitle: row.subtitle,
+    title: row.title,
+    subtitle: row.subtitle,
 
-      buttonText: row.button_text,
-      buttonLink: row.button_link,
+    buttonText: row.button_text,
+    buttonLink: row.button_link,
 
-      imageUrl: row.image_url,
+    imageUrl: row.image_url,
 
-      displayOrder: row.display_order,
+    displayOrder: row.display_order,
 
-      isActive: row.is_active,
+    isActive: row.is_active,
 
-      createdAt: row.created_at,
-      updatedAt: row.updated_at,
-    };
-  }
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+  };
+}
 
   async getHeroSlides(): Promise<HeroSlide[]> {
     const { data, error } = await supabase
