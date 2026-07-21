@@ -106,6 +106,36 @@ class ProductService {
     return this.mapProduct(data as ProductRow);
   }
 
+  async getRelatedProducts(
+    categoryId: string,
+    currentProductId: string,
+    limit = 4,
+  ): Promise<Product[]> {
+    const { data, error } = await supabase
+      .from("products")
+      .select(`
+      *,
+      categories!products_category_id_fkey (
+        name
+      )
+    `)
+      .eq("status", "published")
+      .eq("category_id", categoryId)
+      .neq("id", currentProductId)
+      .order("display_order", { ascending: true })
+      .limit(limit);
+
+    if (error) {
+      throw new Error(
+        `Failed to fetch related products: ${error.message}`,
+      );
+    }
+
+    return (data as ProductRow[]).map((row) =>
+      this.mapProduct(row),
+    );
+  }
+
   async getFeaturedProducts(): Promise<Product[]> {
     const { data, error } = await supabase
       .from("products")

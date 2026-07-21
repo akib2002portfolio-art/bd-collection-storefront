@@ -2,9 +2,9 @@ import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
+import { PlaceholderImage } from "../../../../components/ui/placeholder-image";
 import { formatPrice } from "../../../../lib/format";
 import { cn } from "../../../../lib/utils";
-import { PlaceholderImage } from "../../../../components/ui/placeholder-image";
 
 import type { Product } from "../../types/product";
 
@@ -22,8 +22,12 @@ export function ProductCard({
   const [hover, setHover] = useState(false);
 
   return (
-    <div
-      className={cn("group relative", className)}
+    <motion.article
+      layout
+      className={cn(
+        "group relative overflow-hidden rounded-2xl",
+        className,
+      )}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
@@ -34,13 +38,29 @@ export function ProductCard({
         }}
         className="block"
       >
-        <div className="relative overflow-hidden rounded-xl">
+        <div className="relative overflow-hidden rounded-2xl bg-muted">
+          {(product.newArrival || product.featured) && (
+            <div className="absolute left-3 top-3 z-20 flex gap-2">
+              {product.newArrival && (
+                <span className="rounded-full bg-black px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-white">
+                  New
+                </span>
+              )}
+
+              {!product.newArrival && product.featured && (
+                <span className="rounded-full bg-primary px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-primary-foreground">
+                  Featured
+                </span>
+              )}
+            </div>
+          )}
+
           <motion.div
             animate={{
-              scale: hover ? 1.03 : 1,
+              scale: hover ? 1.06 : 1,
             }}
             transition={{
-              duration: 0.8,
+              duration: 0.7,
               ease: [0.22, 1, 0.36, 1],
             }}
           >
@@ -49,7 +69,7 @@ export function ProductCard({
                 src={product.imageUrl}
                 alt={product.name}
                 loading="lazy"
-                className="aspect-[4/5] h-full w-full object-cover"
+                className="aspect-[4/5] w-full object-cover"
               />
             ) : (
               <PlaceholderImage
@@ -63,27 +83,44 @@ export function ProductCard({
             initial={false}
             animate={{
               opacity: hover ? 1 : 0,
-              y: hover ? 0 : 20,
+            }}
+            transition={{
+              duration: 0.25,
+            }}
+            className="absolute inset-0 bg-black/15"
+          />
+
+          <motion.div
+            initial={false}
+            animate={{
+              opacity: hover ? 1 : 0,
+              y: hover ? 0 : 12,
             }}
             transition={{
               duration: 0.3,
             }}
-            className="absolute inset-x-3 bottom-3 flex h-11 items-center justify-center rounded-lg bg-black text-xs font-medium uppercase tracking-[0.22em] text-white"
+            className="absolute inset-x-4 bottom-4"
           >
-            View Details
+            <div className="flex h-11 items-center justify-center rounded-xl bg-white font-medium text-sm shadow-lg">
+              View Details
+            </div>
           </motion.div>
         </div>
 
-        <div className="mt-4">
-          <h3 className="truncate text-base font-medium">
+        <div className="space-y-2 px-1 pt-5">
+          <p className="text-[11px] uppercase tracking-[0.28em] text-muted-foreground">
+            {product.categoryName}
+          </p>
+
+          <h3 className="line-clamp-2 text-base font-semibold leading-6 transition-colors group-hover:text-primary">
             {product.name}
           </h3>
 
-          <p className="mt-2 text-sm text-muted-foreground">
+          <p className="pt-1 text-lg font-semibold">
             {formatPrice(product.price)}
           </p>
         </div>
       </Link>
-    </div>
+    </motion.article>
   );
 }

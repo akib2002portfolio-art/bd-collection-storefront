@@ -27,8 +27,9 @@ export function ProductGallery({
   const hasImages = gallery.length > 0;
 
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-[96px_1fr]">
-      <div className="order-2 flex gap-2 md:order-1 md:flex-col">
+    <div className="grid gap-5 lg:grid-cols-[100px_1fr]">
+      {/* Thumbnails */}
+      <div className="order-2 flex gap-3 lg:order-1 lg:flex-col">
         {hasImages ? (
           gallery.map((src, index) => (
             <button
@@ -37,9 +38,9 @@ export function ProductGallery({
               onClick={() => setCurrent(index)}
               aria-label={`View image ${index + 1}`}
               className={cn(
-                "overflow-hidden border transition-colors",
+                "overflow-hidden rounded-xl border bg-background transition-all duration-300",
                 current === index
-                  ? "border-primary"
+                  ? "border-primary ring-2 ring-primary/20"
                   : "border-border hover:border-primary/40"
               )}
             >
@@ -58,20 +59,31 @@ export function ProductGallery({
         )}
       </div>
 
-      <div className="order-1 md:order-2">
+      {/* Main Image */}
+      <div className="order-1 overflow-hidden rounded-2xl bg-muted lg:order-2">
         <AnimatePresence mode="wait">
           <motion.div
             key={gallery[current] ?? "placeholder"}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
+            initial={{
+              opacity: 0,
+              scale: 0.98,
+            }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
+            transition={{
+              duration: 0.3,
+            }}
           >
             {hasImages ? (
               <img
                 src={gallery[current]}
                 alt={productName}
-                className="aspect-[4/5] h-full w-full object-cover"
+                className="aspect-[4/5] w-full object-cover"
               />
             ) : (
               <PlaceholderImage
