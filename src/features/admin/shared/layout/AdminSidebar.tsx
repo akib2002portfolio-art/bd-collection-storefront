@@ -70,7 +70,7 @@ export function AdminSidebar() {
       await logout();
 
       navigate({
-        to: "/admin/login",
+        to: "/",
       });
     } catch (error) {
       console.error(error);
