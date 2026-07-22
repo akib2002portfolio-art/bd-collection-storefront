@@ -23,7 +23,7 @@ export function HeroControls({
             className="group flex items-center gap-2"
           >
             <span
-              className={`h-px transition-all duration-500 ${
+              className={`h-px transition-all duration-300 ${
                 currentIndex === index
                   ? "w-14 bg-white"
                   : "w-6 bg-white/30"

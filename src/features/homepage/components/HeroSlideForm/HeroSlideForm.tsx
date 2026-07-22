@@ -1,6 +1,8 @@
 import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { HERO_ROUTE_OPTIONS } from "../../constants/routes";
+import { HeroImageUpload } from "../HeroImageUpload/HeroImageUpload";
 
 import type { HeroSlide, HeroSlideFormData } from "../../types";
 import {
@@ -23,6 +25,7 @@ export function HeroSlideForm({
 }: HeroSlideFormProps) {
   const {
     register,
+    control,
     reset,
     handleSubmit,
     formState: {
@@ -65,21 +68,21 @@ export function HeroSlideForm({
   }, [initialValues, reset]);
 
   const submit = (values: HeroFormValues) => {
-  onSubmit({
-    title: values.title,
+    onSubmit({
+      title: values.title,
 
-    subtitle: values.subtitle ?? "",
+      subtitle: values.subtitle ?? "",
 
-    buttonText: values.buttonText ?? "",
-    buttonLink: values.buttonLink ?? "",
+      buttonText: values.buttonText ?? "",
+      buttonLink: values.buttonLink ?? "",
 
-    imageUrl: values.imageUrl,
+      imageUrl: values.imageUrl,
 
-    displayOrder: values.displayOrder,
+      displayOrder: values.displayOrder,
 
-    isActive: values.isActive,
-  });
-};
+      isActive: values.isActive,
+    });
+  };
 
   return (
     <form
@@ -135,24 +138,49 @@ export function HeroSlideForm({
 
         <div>
           <label className="mb-2 block text-sm font-medium">
-            Button Link
+            Button Destination
           </label>
 
-          <input
+          <select
             {...register("buttonLink")}
             className="w-full rounded-md border px-3 py-2"
-          />
+          >
+            <option value="">
+              Select a destination
+            </option>
+
+            {HERO_ROUTE_OPTIONS.map((route) => (
+              <option
+                key={route.value}
+                value={route.value}
+              >
+                {route.label}
+              </option>
+            ))}
+          </select>
+
+          {errors.buttonLink && (
+            <p className="mt-1 text-sm text-red-500">
+              {errors.buttonLink.message}
+            </p>
+          )}
         </div>
       </div>
 
       <div>
         <label className="mb-2 block text-sm font-medium">
-          Image URL
+          Hero Image
         </label>
 
-        <input
-          {...register("imageUrl")}
-          className="w-full rounded-md border px-3 py-2"
+        <Controller
+          control={control}
+          name="imageUrl"
+          render={({ field }) => (
+            <HeroImageUpload
+              value={field.value || null}
+              onChange={(value: string | null) => field.onChange(value ?? "")}
+            />
+          )}
         />
 
         {errors.imageUrl && (
