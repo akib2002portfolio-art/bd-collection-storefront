@@ -1,16 +1,27 @@
+import { useNavigate } from "@tanstack/react-router";
+
 import type { HeroSlide } from "../../types";
 
 interface HeroSlideRowProps {
   slide: HeroSlide;
-  onEdit: (slide: HeroSlide) => void;
-  onDelete: (slide: HeroSlide) => void;
+  onDelete: (slide: HeroSlide) => Promise<void>;
 }
 
 export function HeroSlideRow({
   slide,
-  onEdit,
   onDelete,
 }: HeroSlideRowProps) {
+  const navigate = useNavigate();
+
+  function handleEdit() {
+    navigate({
+      to: "/admin/edit-hero/$id",
+      params: {
+        id: slide.id,
+      },
+    });
+  }
+
   async function handleDelete() {
     const confirmed = window.confirm(
       `Delete "${slide.title}"?\n\nThis action cannot be undone.`,
@@ -80,7 +91,7 @@ export function HeroSlideRow({
         <div className="flex justify-end gap-4">
           <button
             type="button"
-            onClick={() => onEdit(slide)}
+            onClick={handleEdit}
             className="text-sm text-ink transition hover:underline"
           >
             Edit

@@ -5,7 +5,6 @@ interface HeroSlideTableProps {
   slides: HeroSlide[];
   loading: boolean;
   error: string | null;
-  onEdit: (slide: HeroSlide) => void;
   onDelete: (slide: HeroSlide) => Promise<void>;
 }
 
@@ -13,7 +12,6 @@ export function HeroSlideTable({
   slides,
   loading,
   error,
-  onEdit,
   onDelete,
 }: HeroSlideTableProps) {
   if (loading) {
@@ -78,7 +76,6 @@ export function HeroSlideTable({
             <HeroSlideRow
               key={slide.id}
               slide={slide}
-              onEdit={onEdit}
               onDelete={onDelete}
             />
           ))}
