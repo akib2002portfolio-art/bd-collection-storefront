@@ -2,6 +2,7 @@ import {
   LayoutDashboard,
   Package,
   Home,
+  Settings,
   LogOut,
 } from "lucide-react";
 
@@ -29,6 +30,11 @@ const navItems = [
     icon: Package,
     href: "/admin/products",
   },
+  {
+    label: "Site Settings",
+    icon: Settings,
+    href: "/admin/settings",
+  },
 ];
 
 export function AdminSidebar() {
@@ -51,6 +57,9 @@ export function AdminSidebar() {
 
       case "/admin/homepage":
         return pathname.startsWith("/admin/homepage");
+
+      case "/admin/settings":
+        return pathname.startsWith("/admin/settings");
 
       default:
         return pathname === href;
@@ -115,7 +124,6 @@ export function AdminSidebar() {
             )}
           >
             <Icon className="h-4 w-4 shrink-0" />
-
             <span>{label}</span>
           </button>
         ))}
@@ -137,7 +145,6 @@ export function AdminSidebar() {
           className="mt-6 flex items-center gap-3 text-xs uppercase tracking-[0.22em] text-taupe transition-colors hover:text-red-600"
         >
           <LogOut className="h-4 w-4" />
-
           Logout
         </button>
       </div>
