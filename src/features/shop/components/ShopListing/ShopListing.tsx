@@ -1,5 +1,6 @@
 import { ProductGrid } from "../ProductGrid";
 import { ShopHeader } from "../ShopHeader";
+
 import { useProducts } from "../../hooks/useProducts";
 
 export function ShopListing() {
@@ -23,7 +24,7 @@ export function ShopListing() {
   if (isError) {
     return (
       <section className="container mx-auto px-6 py-24">
-        <p className="text-center text-red-500">
+        <p className="text-center text-destructive">
           {error instanceof Error
             ? error.message
             : "Failed to load products."}
@@ -33,9 +34,11 @@ export function ShopListing() {
   }
 
   return (
-    <section className="container mx-auto px-6 py-20">
+   <main className="container mx-auto px-6 pt-10 pb-20">
       <ShopHeader
-        title="Discover Our Collection"
+        eyebrow="BD Collection"
+        title="Browse All Products"
+        description="Explore our complete collection of premium fashion designed for every occasion."
         productCount={products.length}
         breadcrumbs={[
           {
@@ -46,12 +49,17 @@ export function ShopListing() {
             label: "Shop",
           },
         ]}
+        showBreadcrumbs
+        align="left"
+        size="compact"
       />
 
-      <ProductGrid
-        products={products}
-        cols={4}
-      />
-    </section>
+      <section className="mt-10">
+        <ProductGrid
+          products={products}
+          cols={4}
+        />
+      </section>
+    </main>
   );
 }

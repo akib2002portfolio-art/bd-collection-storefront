@@ -1,9 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 
-import { CategoryGrid } from "../../../home/components/ShopByCategory/CategoryGrid";
-import { useCategories } from "../../hooks/useCategories";
+import { Button } from "../../../../components/ui/button";
+
 import type { CategoryCardData } from "../../../home/types/home";
+import { CategoryGrid } from "../../../home/components/ShopByCategory/CategoryGrid";
+
+import { useCategories } from "../../hooks/useCategories";
+
+import { ShopHeader } from "../ShopHeader";
 
 export function ShopLanding() {
   const {
@@ -23,42 +28,39 @@ export function ShopLanding() {
   );
 
   return (
-    <main className="container mx-auto px-4 py-16">
-      <section className="mx-auto max-w-4xl text-center">
-        <p className="text-sm uppercase tracking-[0.35em] text-muted-foreground">
-          BD Collection
-        </p>
+   <main className="container mx-auto px-6 pt-14 pb-20">
+      <section className="mx-auto max-w-3xl">
+        <ShopHeader
+          eyebrow="BD Collection"
+          title="Discover Every Collection"
+          description="Browse premium fashion collections curated for every occasion. Explore categories or view our complete catalogue."
+          align="center"
+          size="hero"
+          showBreadcrumbs={false}
+        />
 
-        <h1 className="mt-5 text-5xl font-bold tracking-tight md:text-6xl">
-          Discover Every Collection
-        </h1>
-
-        <p className="mx-auto mt-6 max-w-2xl text-muted-foreground">
-          Browse premium fashion collections curated for every
-          occasion. Explore categories or view our complete
-          product catalogue.
-        </p>
-
-        <Link
-          to="/shop/all"
-          className="mt-10 inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-3 text-background transition hover:opacity-90"
-        >
-          Browse All Products
-          <ArrowRight className="h-4 w-4" />
-        </Link>
+       <div className="mt-8 flex justify-center">
+          <Link to="/shop/all">
+            <Button
+              size="lg"
+              className="rounded-full px-8"
+            >
+              Browse All Products
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
+        </div>
       </section>
 
-      <section className="mt-24">
-        <div className="mb-10 flex items-end justify-between">
-          <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
-              Categories
-            </p>
+      <section className="mt-16">
+        <div className="mb-10">
+          <p className="text-sm uppercase tracking-[0.32em] text-muted-foreground">
+            Categories
+          </p>
 
-            <h2 className="mt-2 text-3xl font-bold">
-              Shop by Category
-            </h2>
-          </div>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight">
+            Shop by Category
+          </h2>
         </div>
 
         {isLoading && (
