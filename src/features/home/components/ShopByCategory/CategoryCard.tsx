@@ -1,10 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
-import type { HomeCategory } from "../../types/home";
+import type { CategoryCardData } from "../../types/home";
 
 interface CategoryCardProps {
-    category: HomeCategory;
+    category: CategoryCardData;
 }
 
 export function CategoryCard({

@@ -1,9 +1,9 @@
-import type { HomeCategory } from "../../types/home";
+import type { CategoryCardData } from "../../types/home";
 
 import { CategoryCard } from "./CategoryCard";
 
 interface CategoryGridProps {
-  categories: HomeCategory[];
+  categories: CategoryCardData[];
 }
 
 export function CategoryGrid({

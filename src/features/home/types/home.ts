@@ -8,7 +8,15 @@ export interface HeroSlide {
   ctaHref: string;
 }
 
-export interface HomeCategory {
+export interface CategoryCardData {
+  id: string;
+  name: string;
+  slug: string;
+  image: string;
+  description: string;
+}
+
+export interface HomeCategory extends CategoryCardData {
   id: string;
   name: string;
   slug: string;

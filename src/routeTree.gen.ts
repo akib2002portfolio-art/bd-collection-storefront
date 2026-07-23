@@ -14,6 +14,8 @@ import { Route as ShopIndexRouteImport } from './routes/shop/index'
 import { Route as ContactIndexRouteImport } from './routes/contact/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AboutIndexRouteImport } from './routes/about/index'
+import { Route as ShopAllRouteImport } from './routes/shop/all'
+import { Route as ShopSlugRouteImport } from './routes/shop/$slug'
 import { Route as ProductSlugRouteImport } from './routes/product/$slug'
 import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
 import { Route as AdminProductsRouteImport } from './routes/admin/products'
@@ -51,6 +53,16 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
 const AboutIndexRoute = AboutIndexRouteImport.update({
   id: '/about/',
   path: '/about/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopAllRoute = ShopAllRouteImport.update({
+  id: '/shop/all',
+  path: '/shop/all',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopSlugRoute = ShopSlugRouteImport.update({
+  id: '/shop/$slug',
+  path: '/shop/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProductSlugRoute = ProductSlugRouteImport.update({
@@ -131,6 +143,8 @@ export interface FileRoutesByFullPath {
   '/admin/products': typeof AdminProductsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/product/$slug': typeof ProductSlugRoute
+  '/shop/$slug': typeof ShopSlugRoute
+  '/shop/all': typeof ShopAllRoute
   '/about/': typeof AboutIndexRoute
   '/admin/': typeof AdminIndexRoute
   '/contact/': typeof ContactIndexRoute
@@ -151,6 +165,8 @@ export interface FileRoutesByTo {
   '/admin/products': typeof AdminProductsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/product/$slug': typeof ProductSlugRoute
+  '/shop/$slug': typeof ShopSlugRoute
+  '/shop/all': typeof ShopAllRoute
   '/about': typeof AboutIndexRoute
   '/admin': typeof AdminIndexRoute
   '/contact': typeof ContactIndexRoute
@@ -172,6 +188,8 @@ export interface FileRoutesById {
   '/admin/products': typeof AdminProductsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/product/$slug': typeof ProductSlugRoute
+  '/shop/$slug': typeof ShopSlugRoute
+  '/shop/all': typeof ShopAllRoute
   '/about/': typeof AboutIndexRoute
   '/admin/': typeof AdminIndexRoute
   '/contact/': typeof ContactIndexRoute
@@ -194,6 +212,8 @@ export interface FileRouteTypes {
     | '/admin/products'
     | '/admin/settings'
     | '/product/$slug'
+    | '/shop/$slug'
+    | '/shop/all'
     | '/about/'
     | '/admin/'
     | '/contact/'
@@ -214,6 +234,8 @@ export interface FileRouteTypes {
     | '/admin/products'
     | '/admin/settings'
     | '/product/$slug'
+    | '/shop/$slug'
+    | '/shop/all'
     | '/about'
     | '/admin'
     | '/contact'
@@ -234,6 +256,8 @@ export interface FileRouteTypes {
     | '/admin/products'
     | '/admin/settings'
     | '/product/$slug'
+    | '/shop/$slug'
+    | '/shop/all'
     | '/about/'
     | '/admin/'
     | '/contact/'
@@ -255,6 +279,8 @@ export interface RootRouteChildren {
   AdminProductsRoute: typeof AdminProductsRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
   ProductSlugRoute: typeof ProductSlugRoute
+  ShopSlugRoute: typeof ShopSlugRoute
+  ShopAllRoute: typeof ShopAllRoute
   AboutIndexRoute: typeof AboutIndexRoute
   AdminIndexRoute: typeof AdminIndexRoute
   ContactIndexRoute: typeof ContactIndexRoute
@@ -299,6 +325,20 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about/'
       preLoaderRoute: typeof AboutIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop/all': {
+      id: '/shop/all'
+      path: '/shop/all'
+      fullPath: '/shop/all'
+      preLoaderRoute: typeof ShopAllRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop/$slug': {
+      id: '/shop/$slug'
+      path: '/shop/$slug'
+      fullPath: '/shop/$slug'
+      preLoaderRoute: typeof ShopSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/product/$slug': {
@@ -407,6 +447,8 @@ const rootRouteChildren: RootRouteChildren = {
   AdminProductsRoute: AdminProductsRoute,
   AdminSettingsRoute: AdminSettingsRoute,
   ProductSlugRoute: ProductSlugRoute,
+  ShopSlugRoute: ShopSlugRoute,
+  ShopAllRoute: ShopAllRoute,
   AboutIndexRoute: AboutIndexRoute,
   AdminIndexRoute: AdminIndexRoute,
   ContactIndexRoute: ContactIndexRoute,
