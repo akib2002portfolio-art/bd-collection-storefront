@@ -21,9 +21,15 @@ export function ProductInfo({ product }: ProductInfoProps) {
       </h1>
 
       {/* Price */}
-      <p className="mt-8 text-4xl font-bold">
-        {formatPrice(product.price)}
-      </p>
+      {product.price !== null && product.currency !== null ? (
+        <p className="mt-8 text-4xl font-bold">
+          {formatPrice(product.price, product.currency)}
+        </p>
+      ) : (
+        <p className="mt-8 text-lg font-medium text-muted-foreground">
+          Contact for Price
+        </p>
+      )}
 
       {/* Product Details */}
       <div className="mt-10 rounded-2xl border bg-muted/20 p-6">

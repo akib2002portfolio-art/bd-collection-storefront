@@ -16,14 +16,24 @@ export interface HomeCategory {
   description: string;
 }
 
+export type CurrencyCode =
+  | "BDT"
+  | "USD";
+
 export interface ProductPreview {
   id: string;
   name: string;
   slug: string;
-  price: number;
+
+  price: number | null;
+  currency: CurrencyCode | null;
+
   salePrice?: number;
+
   thumbnail: string;
+
   category: string;
+
   isNew: boolean;
 }
 

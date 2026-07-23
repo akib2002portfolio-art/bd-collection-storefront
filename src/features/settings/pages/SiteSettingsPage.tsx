@@ -49,7 +49,7 @@ export function SiteSettingsPage() {
     return (
         <AdminLayout
             title="Site Settings"
-            subtitle="Manage branding, SEO, contact information and store settings"
+            subtitle="Manage your store branding, contact information and business details."
         >
             <SiteSettingsForm
                 initialValues={data}

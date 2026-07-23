@@ -4,6 +4,7 @@ import { ImageUpload } from "./ImageUpload";
 
 import type {
     CreateProductInput,
+    CurrencyCode,
     Product,
 } from "../types/product";
 
@@ -28,7 +29,8 @@ export function ProductForm({
             short_description: "",
             description: "",
             sku: "",
-            price: 0,
+            price: null,
+            currency: null,
             stock: 0,
             image_url: null,
             featured: false,
@@ -57,6 +59,7 @@ export function ProductForm({
             description: initialData.description,
             sku: initialData.sku,
             price: initialData.price,
+            currency: initialData.currency,
             stock: initialData.stock,
             image_url: initialData.image_url,
             featured: initialData.featured,
@@ -83,6 +86,20 @@ export function ProductForm({
         e: React.FormEvent<HTMLFormElement>,
     ) {
         e.preventDefault();
+
+        const hasPrice =
+            formData.price !== null;
+
+        const hasCurrency =
+            formData.currency !== null;
+
+        if (hasPrice !== hasCurrency) {
+            alert(
+                "Price and Currency must both be filled or both left empty.",
+            );
+            return;
+        }
+
         await onSubmit(formData);
     }
 
@@ -216,29 +233,58 @@ export function ProductForm({
             </div>
 
             {/* Price + Stock */}
-            <div className="grid gap-6 md:grid-cols-2">
+            {/* Price + Currency + Stock */}
+            <div className="grid gap-6 md:grid-cols-3">
+
                 <div>
                     <label className="mb-2 block text-sm font-medium">
-                        Price
+                        Regular Price
                     </label>
 
                     <input
                         type="number"
-                        min={0}
-                        placeholder="1200"
-                        value={
-                            formData.price === 0
-                                ? ""
-                                : formData.price
-                        }
+                        min={1}
+                        placeholder="1500"
+                        value={formData.price ?? ""}
                         onChange={(e) =>
                             updateField(
                                 "price",
-                                Number(e.target.value) || 0,
+                                e.target.value === ""
+                                    ? null
+                                    : Number(e.target.value),
                             )
                         }
                         className="w-full rounded-md border border-hairline px-4 py-3"
                     />
+                </div>
+
+                <div>
+                    <label className="mb-2 block text-sm font-medium">
+                        Currency
+                    </label>
+
+                    <select
+                        value={formData.currency ?? ""}
+                        onChange={(e) =>
+                            updateField(
+                                "currency",
+                                (e.target.value || null) as CurrencyCode | null,
+                            )
+                        }
+                        className="w-full rounded-md border border-hairline px-4 py-3"
+                    >
+                        <option value="">
+                            No Price
+                        </option>
+
+                        <option value="BDT">
+                            BDT (৳)
+                        </option>
+
+                        <option value="USD">
+                            USD ($)
+                        </option>
+                    </select>
                 </div>
 
                 <div>
@@ -264,26 +310,7 @@ export function ProductForm({
                         className="w-full rounded-md border border-hairline px-4 py-3"
                     />
                 </div>
-            </div>
 
-            {/* Display Order */}
-            <div>
-                <label className="mb-2 block text-sm font-medium">
-                    Display Order
-                </label>
-
-                <input
-                    type="number"
-                    min={0}
-                    value={formData.display_order}
-                    onChange={(e) =>
-                        updateField(
-                            "display_order",
-                            Number(e.target.value) || 0,
-                        )
-                    }
-                    className="w-full rounded-md border border-hairline px-4 py-3"
-                />
             </div>
 
             {/* Featured + New Arrival */}

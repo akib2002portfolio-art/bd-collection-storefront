@@ -1,5 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
-
+import { formatPrice } from "../../../../lib/format";
 import type { Category } from "../../categories/types/category";
 import type { Product } from "../types/product";
 import { ProductStatusBadge } from "./ProductStatusBadge";
@@ -88,7 +88,9 @@ export function ProductRow({
       </td>
 
       <td className="px-6 py-4">
-        ৳{product.price}
+        {product.price !== null && product.currency !== null
+          ? formatPrice(product.price, product.currency)
+          : "-"}
       </td>
 
       <td className="px-6 py-4">

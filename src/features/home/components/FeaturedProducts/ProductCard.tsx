@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-
+import { formatPrice } from "../../../../lib/format";
 import type { ProductPreview } from "../../types/home";
 
 interface ProductCardProps {
@@ -46,20 +46,24 @@ export function ProductCard({ product }: ProductCardProps) {
           </h3>
 
           <div className="mt-3 flex items-center gap-3">
-            {product.salePrice ? (
-              <>
-                <span className="text-lg font-semibold">
-                  ৳{product.salePrice}
-                </span>
+            {product.price !== null && product.currency !== null && (
+              <div className="mt-3 flex items-center gap-3">
+                {product.salePrice ? (
+                  <>
+                    <span className="text-lg font-semibold">
+                      {formatPrice(product.salePrice, product.currency)}
+                    </span>
 
-                <span className="text-sm text-muted-foreground line-through">
-                  ৳{product.price}
-                </span>
-              </>
-            ) : (
-              <span className="text-lg font-semibold">
-                ৳{product.price}
-              </span>
+                    <span className="text-sm text-muted-foreground line-through">
+                      {formatPrice(product.price, product.currency)}
+                    </span>
+                  </>
+                ) : (
+                  <span className="text-lg font-semibold">
+                    {formatPrice(product.price, product.currency)}
+                  </span>
+                )}
+              </div>
             )}
           </div>
         </div>

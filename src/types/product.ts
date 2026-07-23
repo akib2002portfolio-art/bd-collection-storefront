@@ -3,6 +3,10 @@ export type ProductStatus =
   | "published"
   | "out_of_stock";
 
+export type CurrencyCode =
+  | "BDT"
+  | "USD";
+
 export interface Product {
   id: string;
 
@@ -15,7 +19,9 @@ export interface Product {
   short_description: string;
   description: string;
 
-  price: number;
+  price: number | null;
+  currency: CurrencyCode | null;
+
   stock: number;
 
   image_url: string | null;
@@ -41,7 +47,9 @@ export interface CreateProductInput {
   short_description: string;
   description: string;
 
-  price: number;
+  price: number | null;
+  currency: CurrencyCode | null;
+
   stock: number;
 
   image_url: string | null;

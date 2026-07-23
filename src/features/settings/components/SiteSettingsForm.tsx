@@ -165,6 +165,7 @@ export function SiteSettingsForm({
                 >
                     <input
                         {...register("tagline")}
+                        placeholder="Premium Fashion for Every Occasion"
                         disabled={loading}
                         className="w-full rounded-md border px-3 py-2 disabled:opacity-50"
                     />
@@ -177,6 +178,11 @@ export function SiteSettingsForm({
                     <textarea
                         {...register("description")}
                         rows={4}
+                        placeholder={`Tell customers about your business.
+
+Example:
+
+BD Collection offers premium fashion for men, women and children with delivery across Bangladesh.`}
                         disabled={loading}
                         className="w-full rounded-md border px-3 py-2 disabled:opacity-50"
                     />
@@ -188,6 +194,7 @@ export function SiteSettingsForm({
                 >
                     <input
                         {...register("browserTitle")}
+                        placeholder="BD Collection"
                         disabled={loading}
                         className="w-full rounded-md border px-3 py-2 disabled:opacity-50"
                     />
@@ -366,26 +373,6 @@ export function SiteSettingsForm({
             </section>
 
             {/* -------------------------------- */}
-            {/* Store */}
-            {/* -------------------------------- */}
-
-            <section className="space-y-6">
-                <h3 className="border-b border-hairline pb-2 text-lg font-semibold text-ink">
-                    Store
-                </h3>
-
-                <FormField
-                    label="Default Currency"
-                    error={errors.defaultCurrency}
-                >
-                    <input
-                        {...register("defaultCurrency")}
-                        disabled={loading}
-                        className="w-40 rounded-md border px-3 py-2 disabled:opacity-50"
-                    />
-                </FormField>
-            </section>
-            {/* -------------------------------- */}
             {/* Footer */}
             {/* -------------------------------- */}
 
@@ -395,12 +382,15 @@ export function SiteSettingsForm({
                 </h3>
 
                 <FormField
-                    label="Footer Text"
+                    label="Footer Message"
                     error={errors.footerText}
                 >
                     <textarea
                         {...register("footerText")}
                         rows={3}
+                        placeholder={`Thank you for shopping with BD Collection.
+
+We appreciate your trust and support.`}
                         disabled={loading}
                         className="w-full rounded-md border px-3 py-2 disabled:opacity-50"
                     />
@@ -412,50 +402,7 @@ export function SiteSettingsForm({
                 >
                     <input
                         {...register("copyrightText")}
-                        disabled={loading}
-                        className="w-full rounded-md border px-3 py-2 disabled:opacity-50"
-                    />
-                </FormField>
-            </section>
-
-            {/* -------------------------------- */}
-            {/* SEO */}
-            {/* -------------------------------- */}
-
-            <section className="space-y-6">
-                <h3 className="border-b border-hairline pb-2 text-lg font-semibold text-ink">
-                    SEO
-                </h3>
-
-                <FormField
-                    label="SEO Title"
-                    error={errors.seoTitle}
-                >
-                    <input
-                        {...register("seoTitle")}
-                        disabled={loading}
-                        className="w-full rounded-md border px-3 py-2 disabled:opacity-50"
-                    />
-                </FormField>
-
-                <FormField
-                    label="SEO Description"
-                    error={errors.seoDescription}
-                >
-                    <textarea
-                        {...register("seoDescription")}
-                        rows={4}
-                        disabled={loading}
-                        className="w-full rounded-md border px-3 py-2 disabled:opacity-50"
-                    />
-                </FormField>
-
-                <FormField
-                    label="SEO Image URL"
-                    error={errors.seoImage}
-                >
-                    <input
-                        {...register("seoImage")}
+                        placeholder="© 2026 BD Collection. All rights reserved."
                         disabled={loading}
                         className="w-full rounded-md border px-3 py-2 disabled:opacity-50"
                     />

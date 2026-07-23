@@ -1,4 +1,10 @@
-export type ProductStatus = "draft" | "published";
+export type ProductStatus =
+  | "draft"
+  | "published";
+
+export type CurrencyCode =
+  | "BDT"
+  | "USD";
 
 export interface Product {
   id: string;
@@ -19,7 +25,9 @@ export interface Product {
 
   imageUrl: string;
 
-  price: number;
+  price: number | null;
+
+  currency: CurrencyCode | null;
 
   stock: number;
 

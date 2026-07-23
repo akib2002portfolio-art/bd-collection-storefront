@@ -116,9 +116,11 @@ export function ProductCard({
             {product.name}
           </h3>
 
-          <p className="pt-1 text-lg font-semibold">
-            {formatPrice(product.price)}
-          </p>
+          {product.price !== null && product.currency !== null && (
+            <p className="pt-1 text-lg font-semibold">
+              {formatPrice(product.price, product.currency)}
+            </p>
+          )}
         </div>
       </Link>
     </motion.article>

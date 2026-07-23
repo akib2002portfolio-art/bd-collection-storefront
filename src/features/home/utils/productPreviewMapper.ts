@@ -10,6 +10,7 @@ export function mapProductToPreview(
     slug: product.slug,
 
     price: product.price,
+    currency: product.currency,
 
     // Database doesn't support sale price yet
     salePrice: undefined,

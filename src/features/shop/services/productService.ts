@@ -1,6 +1,9 @@
 import { supabase } from "../../../lib/supabase";
 
-import type { Product } from "../types";
+import type {
+  Product,
+  CurrencyCode,
+} from "../types";
 
 type ProductRow = {
   id: string;
@@ -18,7 +21,9 @@ type ProductRow = {
   description: string;
   image_url: string;
 
-  price: number;
+  price: number | null;
+  currency: CurrencyCode | null;
+
   stock: number;
 
   featured: boolean;
@@ -49,6 +54,8 @@ class ProductService {
       imageUrl: row.image_url,
 
       price: row.price,
+      currency: row.currency,
+
       stock: row.stock,
 
       featured: row.featured,
@@ -114,11 +121,11 @@ class ProductService {
     const { data, error } = await supabase
       .from("products")
       .select(`
-      *,
-      categories!products_category_id_fkey (
-        name
-      )
-    `)
+        *,
+        categories!products_category_id_fkey (
+          name
+        )
+      `)
       .eq("status", "published")
       .eq("category_id", categoryId)
       .neq("id", currentProductId)
