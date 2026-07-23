@@ -12,8 +12,8 @@ export interface CategoryCardData {
   id: string;
   name: string;
   slug: string;
-  image: string;
-  description: string;
+  image?: string;
+  description?: string;
 }
 
 export interface HomeCategory extends CategoryCardData {
