@@ -88,7 +88,29 @@ class ProductService {
 
     return (data as ProductRow[]).map((row) => this.mapProduct(row));
   }
+  async getProductsByCategory(categoryId: string): Promise<Product[]> {
+    const { data, error } = await supabase
+      .from("products")
+      .select(`
+      *,
+      categories!products_category_id_fkey (
+        name
+      )
+    `)
+      .eq("status", "published")
+      .eq("category_id", categoryId)
+      .order("display_order", { ascending: true });
 
+    if (error) {
+      throw new Error(
+        `Failed to fetch category products: ${error.message}`,
+      );
+    }
+
+    return (data as ProductRow[]).map((row) =>
+      this.mapProduct(row),
+    );
+  }
   async getProductBySlug(slug: string): Promise<Product | null> {
     const { data, error } = await supabase
       .from("products")

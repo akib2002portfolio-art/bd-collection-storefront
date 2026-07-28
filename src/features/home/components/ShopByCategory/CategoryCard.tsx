@@ -12,7 +12,10 @@ export function CategoryCard({
 }: CategoryCardProps) {
     return (
         <Link
-            to="/shop"
+            to="/shop/$slug"
+            params={{
+                slug: category.slug,
+            }}
         >
             <motion.article
                 whileHover={{ y: -6 }}

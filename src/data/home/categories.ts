@@ -5,7 +5,7 @@ export const homeCategories: HomeCategory[] = [
     id: "new-arrival",
     name: "New Arrival",
     slug: "new-arrival",
-    image: "/images/categories/new_arrival.webp",
+    image: "/images/categories/new-arrival.webp",
     description: "Discover the latest arrivals.",
   },
   {

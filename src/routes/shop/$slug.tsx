@@ -1,9 +1,13 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute('/shop/$slug')({
-  component: RouteComponent,
-})
+import { CategoryListing } from "../../features/shop/components/CategoryListing";
 
-function RouteComponent() {
-  return <div>Hello "/shop/$slug"!</div>
+export const Route = createFileRoute("/shop/$slug")({
+  component: CategoryPage,
+});
+
+function CategoryPage() {
+  const { slug } = Route.useParams();
+
+  return <CategoryListing slug={slug} />;
 }
