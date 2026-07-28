@@ -1,10 +1,48 @@
 import { motion } from "framer-motion";
 
-import { homeCategories } from "../../../../data/home/categories";
+import { useCategories } from "../../../shop/hooks/useCategories";
 
 import { CategoryGrid } from "./CategoryGrid";
 
 export function ShopByCategory() {
+  const {
+    data: categories = [],
+    isLoading,
+    isError,
+  } = useCategories();
+
+  if (isLoading) {
+    return (
+      <section className="py-24">
+        <div className="mx-auto max-w-7xl px-6 text-center">
+          <p className="text-muted-foreground">
+            Loading categories...
+          </p>
+        </div>
+      </section>
+    );
+  }
+
+  if (isError) {
+    return (
+      <section className="py-24">
+        <div className="mx-auto max-w-7xl px-6 text-center">
+          <p className="text-destructive">
+            Unable to load categories.
+          </p>
+        </div>
+      </section>
+    );
+  }
+
+  const categoryCards = categories.map((category) => ({
+    id: category.id,
+    name: category.name,
+    slug: category.slug,
+    description: category.description ?? "",
+    image: category.image ?? "/images/category-placeholder.jpg",
+  }));
+
   return (
     <section className="py-24">
       <div className="mx-auto max-w-7xl px-6">
@@ -32,7 +70,7 @@ export function ShopByCategory() {
           </p>
         </motion.div>
 
-        <CategoryGrid categories={homeCategories} />
+        <CategoryGrid categories={categoryCards} />
       </div>
     </section>
   );
