@@ -11,16 +11,12 @@ export interface NavigationItem {
 
 export const shopNavigation: NavigationItem[] = [
   {
-    label: "New Arrival",
-    href: "/shop",
+    label: "Men's Wear",
+    href: "/shop/mens-wear",
   },
   {
-    label: "Men",
-    href: "/shop/men",
-  },
-  {
-    label: "Women",
-    href: "/shop/women",
+    label: "Women's Wear",
+    href: "/shop/womens-wear",
   },
   {
     label: "Kids",
@@ -33,6 +29,10 @@ export const shopNavigation: NavigationItem[] = [
 ];
 
 export const infoNavigation: NavigationItem[] = [
+  {
+    label: "Home",
+    href: "/",
+  },
   {
     label: "About",
     href: "/about",
