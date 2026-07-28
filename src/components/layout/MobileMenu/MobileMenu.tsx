@@ -3,7 +3,10 @@ import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 
-import { shopNavigation, infoNavigation } from "../../../data/navigation";
+import {
+  shopNavigation,
+  infoNavigation,
+} from "../../../config/navigation";
 import { siteConfig } from "../../../data/site";
 
 interface MobileMenuProps {

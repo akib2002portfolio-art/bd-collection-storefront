@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 import {
   infoNavigation,
   shopNavigation,
-} from "../../../data/navigation";
+} from "../../../config/navigation";
 
 import { MegaMenu } from "./MegaMenu";
 import { useHeaderTheme } from "./HeaderContext";

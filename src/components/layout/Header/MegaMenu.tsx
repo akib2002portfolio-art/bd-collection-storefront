@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
-import type { NavigationItem } from "../../../data/navigation";
+import type { NavigationItem } from "../../../config/navigation";
 
 interface MegaMenuProps {
   items: NavigationItem[];
