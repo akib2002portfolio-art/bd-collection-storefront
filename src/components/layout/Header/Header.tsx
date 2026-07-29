@@ -17,29 +17,21 @@ export function Header() {
 
   const isHomePage = pathname === "/";
 
-  const [isScrolled, setIsScrolled] =
-    useState(false);
-
-  const [isMobileMenuOpen, setIsMobileMenuOpen] =
-    useState(false);
-
-  const [isSearchOpen, setIsSearchOpen] =
-    useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 15);
     };
 
-    onScroll();
+    handleScroll();
 
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () =>
-      window.removeEventListener(
-        "scroll",
-        onScroll
-      );
+      window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const variant =
@@ -58,38 +50,49 @@ export function Header() {
       <>
         <header
           className={[
-            "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+            "fixed inset-x-0 top-0 z-50",
+            "transition-all duration-500 ease-out",
             variant === "transparent"
               ? "bg-transparent"
-              : "border-b border-border/60 bg-background/90 shadow-sm backdrop-blur-xl",
+              : [
+                  "border-b border-border/50",
+                  "bg-background/85",
+                  "backdrop-blur-2xl",
+                  "shadow-[0_10px_40px_rgba(0,0,0,0.08)]",
+                ].join(" "),
           ].join(" ")}
         >
-          <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-            <Logo />
+          <div className="mx-auto max-w-7xl px-5 lg:px-8">
+            <div className="flex h-24 items-center justify-between">
 
-            <Navigation />
+              {/* Left */}
+              <Logo />
 
-            <div className="flex items-center gap-2">
-              <HeaderActions
-                onSearchClick={() =>
-                  setIsSearchOpen(true)
-                }
-              />
+              {/* Center */}
+              <Navigation />
 
-              <MobileToggle
-                onClick={() =>
-                  setIsMobileMenuOpen(true)
-                }
-              />
+              {/* Right */}
+              <div className="flex items-center gap-3">
+                <HeaderActions
+                  onSearchClick={() =>
+                    setIsSearchOpen(true)
+                  }
+                />
+
+                <MobileToggle
+                  onClick={() =>
+                    setIsMobileMenuOpen(true)
+                  }
+                />
+              </div>
+
             </div>
           </div>
         </header>
 
         <SearchOverlay
           open={isSearchOpen}
-          onClose={() =>
-            setIsSearchOpen(false)
-          }
+          onClose={() => setIsSearchOpen(false)}
         />
 
         <MobileMenu

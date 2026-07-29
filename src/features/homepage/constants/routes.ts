@@ -1,9 +1,4 @@
-export interface HeroRouteOption {
-  label: string;
-  value: string;
-}
-
-export const HERO_ROUTE_OPTIONS: HeroRouteOption[] = [
+export const HERO_ROUTE_OPTIONS = [
   {
     label: "Home",
     value: "/",
@@ -22,18 +17,18 @@ export const HERO_ROUTE_OPTIONS: HeroRouteOption[] = [
   },
   {
     label: "Men's Wear",
-    value: "/shop?category=mens",
+    value: "/shop/mens-wear",
   },
   {
     label: "Women's Wear",
-    value: "/shop?category=womens",
+    value: "/shop/womens-wear",
   },
   {
     label: "Kids",
-    value: "/shop?category=kids",
+    value: "/shop/kids",
   },
   {
     label: "Accessories",
-    value: "/shop?category=accessories",
+    value: "/shop/accessories",
   },
-];
+] as const;

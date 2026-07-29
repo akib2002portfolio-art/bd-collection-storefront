@@ -145,10 +145,6 @@ export function HeroSlideForm({
             {...register("buttonLink")}
             className="w-full rounded-md border px-3 py-2"
           >
-            <option value="">
-              Select a destination
-            </option>
-
             {HERO_ROUTE_OPTIONS.map((route) => (
               <option
                 key={route.value}
@@ -166,7 +162,6 @@ export function HeroSlideForm({
           )}
         </div>
       </div>
-
       <div>
         <label className="mb-2 block text-sm font-medium">
           Hero Image

@@ -15,54 +15,79 @@ export function HeaderActions({
 
   const isTransparent = variant === "transparent";
 
-  const buttonClass = isTransparent
+  const searchClass = isTransparent
     ? [
-        "border-white/30",
+        "border-white/20",
         "bg-white/10",
         "text-white",
+        "backdrop-blur-xl",
         "hover:bg-white/20",
+        "hover:border-white/40",
       ].join(" ")
     : [
-        "border-border",
-        "bg-background",
+        "border-border/70",
+        "bg-background/80",
         "text-foreground",
-        "hover:bg-muted",
+        "backdrop-blur-xl",
+        "hover:bg-primary",
+        "hover:text-primary-foreground",
+        "hover:border-primary",
       ].join(" ");
 
   const adminClass = isTransparent
     ? [
-        "border-white/30",
+        "border-white/20",
+        "bg-white/10",
         "text-white",
-        "hover:bg-white/10",
+        "backdrop-blur-xl",
+        "hover:bg-white/20",
+        "hover:border-white/40",
       ].join(" ")
     : [
-        "border-border",
+        "border-border/70",
+        "bg-background/80",
         "text-foreground",
-        "hover:bg-muted",
+        "backdrop-blur-xl",
+        "hover:bg-primary",
+        "hover:text-primary-foreground",
+        "hover:border-primary",
       ].join(" ");
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-3">
       <button
         type="button"
         aria-label="Search products"
         onClick={onSearchClick}
         className={[
-          "inline-flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-300",
-          buttonClass,
+          "group inline-flex h-11 w-11 items-center justify-center",
+          "rounded-full border",
+          "transition-all duration-300",
+          "hover:-translate-y-0.5",
+          "hover:shadow-lg",
+          searchClass,
         ].join(" ")}
       >
-        <Search className="h-5 w-5" />
+        <Search className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
       </button>
 
       <Link
         to={siteConfig.adminLoginPath}
         className={[
-          "hidden items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-all duration-300 sm:inline-flex",
+          "hidden sm:inline-flex",
+          "items-center gap-2",
+          "rounded-full",
+          "border",
+          "px-5 py-2.5",
+          "text-sm font-semibold",
+          "tracking-wide",
+          "transition-all duration-300",
+          "hover:-translate-y-0.5",
+          "hover:shadow-lg",
           adminClass,
         ].join(" ")}
       >
-        <ShieldUser className="h-4 w-4" />
+        <ShieldUser className="h-4 w-4 transition-transform duration-300 group-hover:rotate-6" />
         <span>Admin</span>
       </Link>
     </div>
