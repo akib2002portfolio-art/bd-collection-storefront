@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-
+import { useEffect, useRef, useState } from "react";
+import { storageService } from "../services/storageService";
 import type { Category } from "../types/category";
 
 export interface CategoryFormData {
@@ -31,6 +31,13 @@ export function CategoryForm({
       image: null,
       display_order: 0,
     });
+  const [uploading, setUploading] = useState(false);
+
+  const [uploadError, setUploadError] =
+    useState<string | null>(null);
+
+  const fileInputRef =
+    useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!initialData) return;
@@ -57,7 +64,29 @@ export function CategoryForm({
       [key]: value,
     }));
   }
+  async function handleImageUpload(
+    file: File,
+  ) {
+    try {
+      setUploading(true);
+      setUploadError(null);
 
+      const imageUrl =
+        await storageService.uploadCategoryImage(
+          file,
+        );
+
+      updateField("image", imageUrl);
+    } catch (error) {
+      setUploadError(
+        error instanceof Error
+          ? error.message
+          : "Image upload failed.",
+      );
+    } finally {
+      setUploading(false);
+    }
+  }
   async function handleSubmit(
     e: React.FormEvent<HTMLFormElement>,
   ) {
@@ -123,20 +152,64 @@ export function CategoryForm({
       <div className="grid gap-6 md:grid-cols-2">
         <div>
           <label className="mb-2 block text-sm font-medium">
-            Image URL
+            Category Image
           </label>
 
-          <input
-            value={formData.image ?? ""}
-            onChange={(e) =>
-              updateField(
-                "image",
-                e.target.value || null,
-              )
-            }
-            placeholder="https://..."
-            className="w-full rounded-md border border-hairline px-4 py-3"
-          />
+          <div className="space-y-4">
+
+            <div className="flex h-48 items-center justify-center overflow-hidden rounded-lg border border-hairline bg-muted">
+
+              {formData.image ? (
+                <img
+                  src={formData.image}
+                  alt="Category Preview"
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <span className="text-sm text-muted-foreground">
+                  No image selected
+                </span>
+              )}
+
+            </div>
+
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/png,image/jpeg,image/webp"
+              className="hidden"
+              onChange={async (e) => {
+                const file =
+                  e.target.files?.[0];
+
+                if (!file) return;
+
+                await handleImageUpload(file);
+              }}
+            />
+
+            <button
+              type="button"
+              disabled={uploading}
+              onClick={() =>
+                fileInputRef.current?.click()
+              }
+              className="rounded-md border border-hairline px-4 py-2 transition hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {uploading
+                ? "Uploading..."
+                : formData.image
+                  ? "Replace Image"
+                  : "Browse Image"}
+            </button>
+
+            {uploadError && (
+              <p className="text-sm text-red-500">
+                {uploadError}
+              </p>
+            )}
+
+          </div>
         </div>
 
         <div>

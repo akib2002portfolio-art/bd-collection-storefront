@@ -3,6 +3,7 @@ import {
   Package,
   Home,
   Settings,
+  FolderTree,
   LogOut,
 } from "lucide-react";
 
@@ -31,6 +32,11 @@ const navItems = [
     href: "/admin/products",
   },
   {
+    label: "Categories",
+    icon: FolderTree,
+    href: "/admin/categories",
+  },
+  {
     label: "Site Settings",
     icon: Settings,
     href: "/admin/settings",
@@ -53,6 +59,13 @@ export function AdminSidebar() {
           pathname.startsWith("/admin/products") ||
           pathname.startsWith("/admin/new-product") ||
           pathname.startsWith("/admin/edit-product")
+        );
+
+      case "/admin/categories":
+        return (
+          pathname.startsWith("/admin/categories") ||
+          pathname.startsWith("/admin/new-category") ||
+          pathname.startsWith("/admin/edit-category")
         );
 
       case "/admin/homepage":
