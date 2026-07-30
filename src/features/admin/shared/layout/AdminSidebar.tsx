@@ -4,6 +4,7 @@ import {
   Home,
   Settings,
   FolderTree,
+  FileText,
   LogOut,
 } from "lucide-react";
 
@@ -25,6 +26,11 @@ const navItems = [
     label: "Homepage",
     icon: Home,
     href: "/admin/homepage",
+  },
+  {
+    label: "About",
+    icon: FileText,
+    href: "/admin/about",
   },
   {
     label: "Products",
@@ -70,7 +76,8 @@ export function AdminSidebar() {
 
       case "/admin/homepage":
         return pathname.startsWith("/admin/homepage");
-
+      case "/admin/about":
+        return pathname.startsWith("/admin/about");
       case "/admin/settings":
         return pathname.startsWith("/admin/settings");
 

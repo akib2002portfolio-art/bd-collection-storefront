@@ -5,6 +5,7 @@ import { useRouterState } from "@tanstack/react-router";
 import { Header } from "../../components/layout/Header";
 import { Footer } from "../../components/layout/Footer";
 import { LoadingScreen } from "../../components/layout/LoadingScreen";
+import { SiteBrandingProvider } from "../../components/providers/SiteBrandingProvider";
 
 export default function AppLayout({
   children,
@@ -28,6 +29,8 @@ export default function AppLayout({
 
   return (
     <>
+      <SiteBrandingProvider />
+
       <LoadingScreen isLoading={isLoading} />
 
       {isAdminRoute ? (

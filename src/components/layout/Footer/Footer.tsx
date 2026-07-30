@@ -219,9 +219,26 @@ export function Footer() {
                 `© ${new Date().getFullYear()} ${settings?.storeName}. All rights reserved.`}
             </p>
 
-            <p>
-              Crafted with ❤️ for premium fashion.
-            </p>
+            <div className="text-right">
+              <p className="text-sm text-white/50">
+                Website Designed & Developed by
+              </p>
+
+              <a
+                href="https://akibalimran.vercel.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-1 inline-block text-lg font-semibold text-white transition hover:text-primary"
+              >
+                Akib Al Imran
+              </a>
+
+              <p className="mt-1 text-xs text-white/45">
+                Full-Stack Software Engineer
+                <br />
+                React • TypeScript • AI • UI/UX
+              </p>
+            </div>
 
           </div>
 

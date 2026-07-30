@@ -26,6 +26,7 @@ import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as AdminHomepageRouteImport } from './routes/admin/homepage'
 import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
 import { Route as AdminCategoriesRouteImport } from './routes/admin/categories'
+import { Route as AdminAboutRouteImport } from './routes/admin/about'
 import { Route as AdminEditProductIdRouteImport } from './routes/admin/edit-product/$id'
 import { Route as AdminEditHeroIdRouteImport } from './routes/admin/edit-hero/$id'
 import { Route as AdminEditCategoryIdRouteImport } from './routes/admin/edit-category.$id'
@@ -115,6 +116,11 @@ const AdminCategoriesRoute = AdminCategoriesRouteImport.update({
   path: '/admin/categories',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminAboutRoute = AdminAboutRouteImport.update({
+  id: '/admin/about',
+  path: '/admin/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminEditProductIdRoute = AdminEditProductIdRouteImport.update({
   id: '/admin/edit-product/$id',
   path: '/admin/edit-product/$id',
@@ -133,6 +139,7 @@ const AdminEditCategoryIdRoute = AdminEditCategoryIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin/about': typeof AdminAboutRoute
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/homepage': typeof AdminHomepageRoute
@@ -155,6 +162,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin/about': typeof AdminAboutRoute
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/homepage': typeof AdminHomepageRoute
@@ -178,6 +186,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin/about': typeof AdminAboutRoute
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/homepage': typeof AdminHomepageRoute
@@ -202,6 +211,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin/about'
     | '/admin/categories'
     | '/admin/dashboard'
     | '/admin/homepage'
@@ -224,6 +234,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin/about'
     | '/admin/categories'
     | '/admin/dashboard'
     | '/admin/homepage'
@@ -246,6 +257,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/admin/about'
     | '/admin/categories'
     | '/admin/dashboard'
     | '/admin/homepage'
@@ -269,6 +281,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminAboutRoute: typeof AdminAboutRoute
   AdminCategoriesRoute: typeof AdminCategoriesRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
   AdminHomepageRoute: typeof AdminHomepageRoute
@@ -411,6 +424,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminCategoriesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/about': {
+      id: '/admin/about'
+      path: '/admin/about'
+      fullPath: '/admin/about'
+      preLoaderRoute: typeof AdminAboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/edit-product/$id': {
       id: '/admin/edit-product/$id'
       path: '/admin/edit-product/$id'
@@ -437,6 +457,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminAboutRoute: AdminAboutRoute,
   AdminCategoriesRoute: AdminCategoriesRoute,
   AdminDashboardRoute: AdminDashboardRoute,
   AdminHomepageRoute: AdminHomepageRoute,
