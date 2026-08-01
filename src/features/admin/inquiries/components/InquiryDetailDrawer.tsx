@@ -5,9 +5,13 @@ import {
   Package,
   Calendar,
   User,
+  Check,
+  Archive,
 } from "lucide-react";
 
 import { InquiryStatusBadge } from "./InquiryStatusBadge";
+
+import { useUpdateInquiryStatus } from "../../../contact/hooks";
 
 import type { Inquiry } from "../../../contact/types";
 
@@ -22,7 +26,28 @@ export function InquiryDetailDrawer({
   open,
   onClose,
 }: InquiryDetailDrawerProps) {
+  const updateStatus =
+    useUpdateInquiryStatus();
+
   if (!open || !inquiry) return null;
+
+  async function changeStatus(
+    status: "read" | "archived",
+  ) {
+    if (!inquiry) return;
+
+    try {
+      await updateStatus.mutateAsync({
+        id: inquiry.id,
+        status,
+      });
+
+      onClose();
+    } catch (error) {
+      console.error(error);
+      alert("Failed to update inquiry.");
+    }
+  }
 
   return (
     <>
@@ -31,7 +56,9 @@ export function InquiryDetailDrawer({
         onClick={onClose}
       />
 
-      <aside className="fixed right-0 top-0 z-50 h-screen w-full max-w-xl overflow-y-auto border-l bg-background shadow-2xl">
+      <aside className="fixed right-0 top-0 z-50 flex h-screen w-full max-w-xl flex-col border-l bg-background shadow-2xl">
+
+        {/* Header */}
 
         <div className="flex items-center justify-between border-b p-6">
 
@@ -48,7 +75,9 @@ export function InquiryDetailDrawer({
 
         </div>
 
-        <div className="space-y-6 p-6">
+        {/* Body */}
+
+        <div className="flex-1 space-y-6 overflow-y-auto p-6">
 
           <InquiryStatusBadge
             status={inquiry.status}
@@ -116,6 +145,38 @@ export function InquiryDetailDrawer({
             </div>
 
           </div>
+
+        </div>
+
+        {/* Footer */}
+
+        <div className="flex gap-3 border-t p-6">
+
+          {inquiry.status === "unread" && (
+            <button
+              onClick={() =>
+                changeStatus("read")
+              }
+              disabled={updateStatus.isPending}
+              className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-3 font-medium text-white transition hover:bg-blue-700 disabled:opacity-50"
+            >
+              <Check size={18} />
+              Mark as Read
+            </button>
+          )}
+
+          {inquiry.status !== "archived" && (
+            <button
+              onClick={() =>
+                changeStatus("archived")
+              }
+              disabled={updateStatus.isPending}
+              className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-neutral-800 px-4 py-3 font-medium text-white transition hover:bg-black disabled:opacity-50"
+            >
+              <Archive size={18} />
+              Archive
+            </button>
+          )}
 
         </div>
 
