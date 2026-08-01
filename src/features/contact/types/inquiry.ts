@@ -27,6 +27,17 @@ export interface Inquiry {
   productId: string | null;
 
   createdAt: string;
+
+  product?: {
+    id: string;
+    name: string;
+    sku: string;
+    imageUrl: string | null;
+    category?: {
+      id: string;
+      name: string;
+    } | null;
+  } | null;
 }
 
 export interface CreateInquiryInput {

@@ -23,6 +23,7 @@ import { Route as AdminNewProductRouteImport } from './routes/admin/new-product'
 import { Route as AdminNewHeroRouteImport } from './routes/admin/new-hero'
 import { Route as AdminNewCategoryRouteImport } from './routes/admin/new-category'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
+import { Route as AdminInquiriesRouteImport } from './routes/admin/inquiries'
 import { Route as AdminHomepageRouteImport } from './routes/admin/homepage'
 import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
 import { Route as AdminCategoriesRouteImport } from './routes/admin/categories'
@@ -101,6 +102,11 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminInquiriesRoute = AdminInquiriesRouteImport.update({
+  id: '/admin/inquiries',
+  path: '/admin/inquiries',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminHomepageRoute = AdminHomepageRouteImport.update({
   id: '/admin/homepage',
   path: '/admin/homepage',
@@ -143,6 +149,7 @@ export interface FileRoutesByFullPath {
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/homepage': typeof AdminHomepageRoute
+  '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/new-category': typeof AdminNewCategoryRoute
   '/admin/new-hero': typeof AdminNewHeroRoute
@@ -166,6 +173,7 @@ export interface FileRoutesByTo {
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/homepage': typeof AdminHomepageRoute
+  '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/new-category': typeof AdminNewCategoryRoute
   '/admin/new-hero': typeof AdminNewHeroRoute
@@ -190,6 +198,7 @@ export interface FileRoutesById {
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/dashboard': typeof AdminDashboardRoute
   '/admin/homepage': typeof AdminHomepageRoute
+  '/admin/inquiries': typeof AdminInquiriesRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/new-category': typeof AdminNewCategoryRoute
   '/admin/new-hero': typeof AdminNewHeroRoute
@@ -215,6 +224,7 @@ export interface FileRouteTypes {
     | '/admin/categories'
     | '/admin/dashboard'
     | '/admin/homepage'
+    | '/admin/inquiries'
     | '/admin/login'
     | '/admin/new-category'
     | '/admin/new-hero'
@@ -238,6 +248,7 @@ export interface FileRouteTypes {
     | '/admin/categories'
     | '/admin/dashboard'
     | '/admin/homepage'
+    | '/admin/inquiries'
     | '/admin/login'
     | '/admin/new-category'
     | '/admin/new-hero'
@@ -261,6 +272,7 @@ export interface FileRouteTypes {
     | '/admin/categories'
     | '/admin/dashboard'
     | '/admin/homepage'
+    | '/admin/inquiries'
     | '/admin/login'
     | '/admin/new-category'
     | '/admin/new-hero'
@@ -285,6 +297,7 @@ export interface RootRouteChildren {
   AdminCategoriesRoute: typeof AdminCategoriesRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
   AdminHomepageRoute: typeof AdminHomepageRoute
+  AdminInquiriesRoute: typeof AdminInquiriesRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminNewCategoryRoute: typeof AdminNewCategoryRoute
   AdminNewHeroRoute: typeof AdminNewHeroRoute
@@ -403,6 +416,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/inquiries': {
+      id: '/admin/inquiries'
+      path: '/admin/inquiries'
+      fullPath: '/admin/inquiries'
+      preLoaderRoute: typeof AdminInquiriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/homepage': {
       id: '/admin/homepage'
       path: '/admin/homepage'
@@ -461,6 +481,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminCategoriesRoute: AdminCategoriesRoute,
   AdminDashboardRoute: AdminDashboardRoute,
   AdminHomepageRoute: AdminHomepageRoute,
+  AdminInquiriesRoute: AdminInquiriesRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminNewCategoryRoute: AdminNewCategoryRoute,
   AdminNewHeroRoute: AdminNewHeroRoute,

@@ -12,16 +12,28 @@ class InquiryService {
 
     const { data, error } = await supabase
       .from("customer_inquiries")
-      .select("*")
+      .select(`
+      *,
+      product:products (
+        id,
+        name,
+        sku,
+        image_url,
+        category:categories (
+          id,
+          name
+        )
+      )
+    `)
       .order("created_at", {
         ascending: false,
       });
-
+      
     if (error) {
       throw new Error(error.message);
     }
 
-    return (data ?? []).map((item) => ({
+    return (data ?? []).map((item: any) => ({
       id: item.id,
       type: item.type,
       status: item.status,
@@ -32,9 +44,23 @@ class InquiryService {
       message: item.message,
       productId: item.product_id,
       createdAt: item.created_at,
+
+      product: item.product
+        ? {
+          id: item.product.id,
+          name: item.product.name,
+          sku: item.product.sku,
+          imageUrl: item.product.image_url,
+          category: item.product.category
+            ? {
+              id: item.product.category.id,
+              name: item.product.category.name,
+            }
+            : null,
+        }
+        : null,
     }));
   }
-
   async createInquiry(
     inquiry: CreateInquiryInput,
   ): Promise<void> {

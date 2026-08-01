@@ -5,6 +5,7 @@ import {
   Settings,
   FolderTree,
   FileText,
+  Inbox,
   LogOut,
 } from "lucide-react";
 
@@ -43,6 +44,11 @@ const navItems = [
     href: "/admin/categories",
   },
   {
+    label: "Inquiries",
+    icon: Inbox,
+    href: "/admin/inquiries",
+  },
+  {
     label: "Site Settings",
     icon: Settings,
     href: "/admin/settings",
@@ -73,7 +79,8 @@ export function AdminSidebar() {
           pathname.startsWith("/admin/new-category") ||
           pathname.startsWith("/admin/edit-category")
         );
-
+        case "/admin/inquiries":
+  return pathname.startsWith("/admin/inquiries");
       case "/admin/homepage":
         return pathname.startsWith("/admin/homepage");
       case "/admin/about":
