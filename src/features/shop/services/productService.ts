@@ -135,6 +135,34 @@ class ProductService {
     return this.mapProduct(data as ProductRow);
   }
 
+  async getProductById(
+    id: string,
+  ): Promise<Product | null> {
+    const { data, error } = await supabase
+      .from("products")
+      .select(`
+      *,
+      categories!products_category_id_fkey (
+        name
+      )
+    `)
+      .eq("id", id)
+      .eq("status", "published")
+      .maybeSingle();
+
+    if (error) {
+      throw new Error(
+        `Failed to fetch product: ${error.message}`,
+      );
+    }
+
+    if (!data) {
+      return null;
+    }
+
+    return this.mapProduct(data as ProductRow);
+  }
+
   async getRelatedProducts(
     categoryId: string,
     currentProductId: string,

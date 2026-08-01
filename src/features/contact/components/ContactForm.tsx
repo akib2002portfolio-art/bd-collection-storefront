@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ArrowRight,
@@ -21,7 +22,13 @@ import {
 
 import { useCreateInquiry } from "../hooks/useInquiry";
 
-export function ContactForm() {
+interface ContactFormProps {
+  productId?: string;
+}
+
+export function ContactForm({
+  productId,
+}: ContactFormProps) {
   const createInquiry = useCreateInquiry();
 
   const [submitted, setSubmitted] = useState(false);
@@ -36,7 +43,8 @@ export function ContactForm() {
     resolver: zodResolver(inquirySchema),
 
     defaultValues: {
-      type: "general",
+      type: productId ? "product" : "general",
+      productId,
       name: "",
       email: "",
       phone: "",
@@ -46,11 +54,26 @@ export function ContactForm() {
   });
 
   const message = watch("message");
+  useEffect(() => {
+    reset((currentValues) => ({
+      ...currentValues,
+      type: productId ? "product" : "general",
+      productId,
+    }));
+  }, [productId, reset]);
 
   function onSubmit(values: InquiryFormValues) {
     createInquiry.mutate(values, {
       onSuccess: () => {
-        reset();
+        reset({
+          type: productId ? "product" : "general",
+          productId,
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+        });
         setSubmitted(true);
       },
     });
@@ -72,8 +95,9 @@ export function ContactForm() {
           </h2>
 
           <p className="mt-4 max-w-md leading-7 text-muted-foreground">
-            Thank you for contacting BD Collection.
-            Our team will get back to you within one business day.
+            {productId
+              ? "Thank you for your product inquiry. Our team will contact you shortly with product details."
+              : "Thank you for contacting BD Collection. Our team will get back to you within one business day."}
           </p>
 
           <button
@@ -136,16 +160,19 @@ export function ContactForm() {
             text-primary
           "
         >
-          Contact Form
+          {productId ? "Product Inquiry" : "Contact Form"}
         </span>
 
         <h2 className="text-3xl font-bold tracking-tight">
-          Send us a Message
+          {productId
+            ? "Send a Product Inquiry"
+            : "Send us a Message"}
         </h2>
 
         <p className="max-w-xl leading-7 text-muted-foreground">
-          We'd love to hear from you.
-          Our team usually replies within one business day.
+          {productId
+            ? "You're contacting us about a selected product. Our team will respond as soon as possible."
+            : "We'd love to hear from you. Our team usually replies within one business day."}
         </p>
       </div>
 
@@ -243,7 +270,11 @@ export function ContactForm() {
             />
 
             <Input
-              placeholder="Enter a subject (optional)"
+              placeholder={
+                productId
+                  ? "Subject (optional)"
+                  : "Enter a subject (optional)"
+              }
               className="pl-11"
               disabled={createInquiry.isPending}
               {...register("subject")}
@@ -261,7 +292,11 @@ export function ContactForm() {
         </label>
 
         <Textarea
-          placeholder="Tell us how we can help you..."
+          placeholder={
+            productId
+              ? "Ask anything about this product..."
+              : "Tell us how we can help you..."
+          }
           maxLength={1000}
           disabled={createInquiry.isPending}
           {...register("message")}

@@ -1,3 +1,5 @@
+import { useNavigate } from "@tanstack/react-router";
+
 import type { Product } from "../../types/product";
 import { formatPrice } from "../../../../lib/format";
 
@@ -6,7 +8,18 @@ interface ProductInfoProps {
 }
 
 export function ProductInfo({ product }: ProductInfoProps) {
+  const navigate = useNavigate();
+
   const isInStock = product.stock > 0;
+
+  function handleInquiry() {
+    navigate({
+      to: "/contact",
+      search: {
+        productId: product.id,
+      },
+    });
+  }
 
   return (
     <div className="flex flex-col">
@@ -93,6 +106,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
       <button
         type="button"
         disabled={!isInStock}
+        onClick={handleInquiry}
         className="mt-10 flex h-14 w-full items-center justify-center rounded-xl bg-primary text-base font-semibold text-primary-foreground shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50"
       >
         Send Inquiry

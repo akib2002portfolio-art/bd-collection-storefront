@@ -11,7 +11,7 @@ class InquiryService {
   async getInquiries(): Promise<Inquiry[]> {
 
     const { data, error } = await supabase
-      .from("contact_inquiries")
+      .from("customer_inquiries")
       .select("*")
       .order("created_at", {
         ascending: false,
@@ -37,10 +37,9 @@ class InquiryService {
 
   async createInquiry(
     inquiry: CreateInquiryInput,
-  ): Promise<Inquiry> {
-
-    const { data, error } = await supabase
-      .from("contact_inquiries")
+  ): Promise<void> {
+    const { error } = await supabase
+      .from("customer_inquiries")
       .insert({
         type: inquiry.type,
         name: inquiry.name,
@@ -49,26 +48,11 @@ class InquiryService {
         subject: inquiry.subject,
         message: inquiry.message,
         product_id: inquiry.productId,
-      })
-      .select()
-      .single();
+      });
 
     if (error) {
       throw new Error(error.message);
     }
-
-    return {
-      id: data.id,
-      type: data.type,
-      status: data.status,
-      name: data.name,
-      email: data.email,
-      phone: data.phone,
-      subject: data.subject,
-      message: data.message,
-      productId: data.product_id,
-      createdAt: data.created_at,
-    };
   }
 
   async updateStatus(
@@ -76,7 +60,7 @@ class InquiryService {
   ): Promise<void> {
 
     const { error } = await supabase
-      .from("contact_inquiries")
+      .from("customer_inquiries")
       .update({
         status: inquiry.status,
       })
