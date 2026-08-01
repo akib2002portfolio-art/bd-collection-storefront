@@ -7,11 +7,15 @@ import {
   User,
   Check,
   Archive,
+  Trash2,
 } from "lucide-react";
 
 import { InquiryStatusBadge } from "./InquiryStatusBadge";
 
-import { useUpdateInquiryStatus } from "../../../contact/hooks";
+import {
+  useUpdateInquiryStatus,
+  useDeleteInquiry,
+} from "../../../contact/hooks";
 
 import type { Inquiry } from "../../../contact/types";
 
@@ -28,7 +32,8 @@ export function InquiryDetailDrawer({
 }: InquiryDetailDrawerProps) {
   const updateStatus =
     useUpdateInquiryStatus();
-
+  const deleteInquiry =
+    useDeleteInquiry();
   if (!open || !inquiry) return null;
 
   async function changeStatus(
@@ -46,6 +51,30 @@ export function InquiryDetailDrawer({
     } catch (error) {
       console.error(error);
       alert("Failed to update inquiry.");
+    }
+  }
+
+  async function handleDelete() {
+    if (!inquiry) return;
+
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this inquiry?\n\nIt will be removed from the inbox but can still be recovered from the database."
+    );
+
+    if (!confirmed) return;
+
+    try {
+      await deleteInquiry.mutateAsync(
+        inquiry.id,
+      );
+
+      onClose();
+    } catch (error) {
+      console.error(error);
+
+      alert(
+        "Failed to delete inquiry.",
+      );
     }
   }
 
@@ -154,9 +183,7 @@ export function InquiryDetailDrawer({
 
           {inquiry.status === "unread" && (
             <button
-              onClick={() =>
-                changeStatus("read")
-              }
+              onClick={() => changeStatus("read")}
               disabled={updateStatus.isPending}
               className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-3 font-medium text-white transition hover:bg-blue-700 disabled:opacity-50"
             >
@@ -167,19 +194,31 @@ export function InquiryDetailDrawer({
 
           {inquiry.status !== "archived" && (
             <button
-              onClick={() =>
-                changeStatus("archived")
+              onClick={() => changeStatus("archived")}
+              disabled={
+                updateStatus.isPending ||
+                inquiry.status === "read"
               }
-              disabled={updateStatus.isPending}
-              className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-neutral-800 px-4 py-3 font-medium text-white transition hover:bg-black disabled:opacity-50"
+              className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-neutral-300 bg-white px-4 py-3 font-medium transition hover:bg-neutral-100 disabled:opacity-50"
             >
               <Archive size={18} />
               Archive
             </button>
           )}
 
-        </div>
+          <button
+            onClick={handleDelete}
+            disabled={deleteInquiry.isPending}
+            className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-3 font-medium text-red-600 transition hover:bg-red-100 disabled:opacity-50"
+          >
+            <Trash2 size={18} />
 
+            {deleteInquiry.isPending
+              ? "Deleting..."
+              : "Delete"}
+          </button>
+
+        </div>
       </aside>
     </>
   );

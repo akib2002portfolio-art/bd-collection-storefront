@@ -1,5 +1,1 @@
-export {
-  useInquiries,
-  useCreateInquiry,
-  useUpdateInquiryStatus,
-} from "./useInquiry";
+export * from "./useInquiry";

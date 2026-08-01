@@ -28,6 +28,7 @@ export interface Inquiry {
 
   createdAt: string;
 
+  isDeleted: boolean;
   product?: {
     id: string;
     name: string;

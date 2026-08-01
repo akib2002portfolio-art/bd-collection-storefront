@@ -1,15 +1,36 @@
+import { useMemo, useState } from "react";
+
+import { Search } from "lucide-react";
+
 import { ProductGrid } from "../ProductGrid";
 import { ShopHeader } from "../ShopHeader";
 
 import { useProducts } from "../../hooks/useProducts";
 
 export function ShopListing() {
+  const [search, setSearch] = useState("");
+
   const {
     data: products = [],
     isLoading,
     isError,
     error,
   } = useProducts();
+
+  const filteredProducts = useMemo(() => {
+    if (!search.trim()) {
+      return products;
+    }
+
+    const keyword = search.toLowerCase();
+
+    return products.filter(
+      (product) =>
+        product.name.toLowerCase().includes(keyword) ||
+        product.sku.toLowerCase().includes(keyword) ||
+        product.categoryName.toLowerCase().includes(keyword)
+    );
+  }, [products, search]);
 
   if (isLoading) {
     return (
@@ -34,7 +55,7 @@ export function ShopListing() {
   }
 
   return (
-   <main className="container mx-auto px-6 pt-10 pb-20">
+    <main className="container mx-auto px-6 pb-20 pt-10">
       <ShopHeader
         eyebrow="BD Collection"
         title="Browse All Products"
@@ -54,11 +75,31 @@ export function ShopListing() {
         size="compact"
       />
 
+      <div className="mt-8">
+        <div className="relative max-w-lg">
+          <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+
+          <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search products..."
+            className="w-full rounded-xl border bg-background py-3 pl-12 pr-4 outline-none transition focus:ring-2 focus:ring-primary"
+          />
+        </div>
+      </div>
+
       <section className="mt-10">
-        <ProductGrid
-          products={products}
-          cols={4}
-        />
+        {filteredProducts.length > 0 ? (
+          <ProductGrid products={filteredProducts} cols={4} />
+        ) : (
+          <div className="rounded-xl border border-dashed py-20 text-center">
+            <h3 className="text-xl font-semibold">No products found</h3>
+
+            <p className="mt-3 text-muted-foreground">
+              Try another search keyword.
+            </p>
+          </div>
+        )}
       </section>
     </main>
   );

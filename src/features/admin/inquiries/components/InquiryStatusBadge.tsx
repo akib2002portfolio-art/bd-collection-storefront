@@ -1,28 +1,45 @@
-import type { InquiryStatus } from "../../../contact/types";
+import {
+  CheckCircle2,
+  Archive,
+  CircleDot,
+} from "lucide-react";
 
 interface InquiryStatusBadgeProps {
-  status: InquiryStatus;
+  status:
+    | "unread"
+    | "read"
+    | "archived";
 }
-
-const styles: Record<InquiryStatus, string> = {
-  unread:
-    "bg-blue-100 text-blue-700 border border-blue-200",
-
-  read:
-    "bg-green-100 text-green-700 border border-green-200",
-
-  archived:
-    "bg-gray-100 text-gray-600 border border-gray-200",
-};
 
 export function InquiryStatusBadge({
   status,
 }: InquiryStatusBadgeProps) {
-  return (
-    <span
-      className={`inline-flex rounded-full px-3 py-1 text-xs font-medium capitalize ${styles[status]}`}
-    >
-      {status}
-    </span>
-  );
+  switch (status) {
+    case "unread":
+      return (
+        <span className="inline-flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700 dark:bg-blue-950/40 dark:text-blue-300">
+          <CircleDot className="h-3.5 w-3.5 fill-current" />
+          Unread
+        </span>
+      );
+
+    case "read":
+      return (
+        <span className="inline-flex items-center gap-2 rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300">
+          <CheckCircle2 className="h-3.5 w-3.5" />
+          Read
+        </span>
+      );
+
+    case "archived":
+      return (
+        <span className="inline-flex items-center gap-2 rounded-full bg-slate-200 px-3 py-1 text-xs font-semibold text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+          <Archive className="h-3.5 w-3.5" />
+          Archived
+        </span>
+      );
+
+    default:
+      return null;
+  }
 }

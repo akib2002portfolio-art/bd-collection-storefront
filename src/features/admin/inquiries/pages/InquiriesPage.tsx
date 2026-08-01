@@ -22,7 +22,7 @@ export function InquiriesPage() {
     isLoading,
     isError,
   } = useInquiries();
-  
+
   const filteredInquiries = useMemo(() => {
     let result = [...inquiries];
 
@@ -67,7 +67,9 @@ export function InquiriesPage() {
     >
       <div className="space-y-6">
 
-        <InquiryStats />
+        <InquiryStats
+          inquiries={inquiries}
+        />
 
         <InquiryToolbar
           search={search}

@@ -50,3 +50,25 @@ export function useUpdateInquiryStatus() {
     },
   });
 }
+
+export function useDeleteInquiry() {
+
+  const queryClient =
+    useQueryClient();
+
+  return useMutation({
+
+    mutationFn: (id: string) =>
+      inquiryService.deleteInquiry(id),
+
+    onSuccess: () => {
+
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEY,
+      });
+
+    },
+
+  });
+
+}

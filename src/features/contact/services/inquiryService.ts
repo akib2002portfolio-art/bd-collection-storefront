@@ -13,18 +13,19 @@ class InquiryService {
     const { data, error } = await supabase
       .from("customer_inquiries")
       .select(`
-      *,
-      product:products (
+    *,
+    product:products (
+      id,
+      name,
+      sku,
+      image_url,
+      category:categories (
         id,
-        name,
-        sku,
-        image_url,
-        category:categories (
-          id,
-          name
-        )
+        name
       )
-    `)
+    )
+  `)
+      .eq("is_deleted", false)
       .order("created_at", {
         ascending: false,
       });
@@ -44,7 +45,7 @@ class InquiryService {
       message: item.message,
       productId: item.product_id,
       createdAt: item.created_at,
-
+      isDeleted: item.is_deleted,
       product: item.product
         ? {
           id: item.product.id,
@@ -95,6 +96,23 @@ class InquiryService {
     if (error) {
       throw new Error(error.message);
     }
+  }
+
+  async deleteInquiry(
+    id: string,
+  ): Promise<void> {
+
+    const { error } = await supabase
+      .from("customer_inquiries")
+      .update({
+        is_deleted: true,
+      })
+      .eq("id", id);
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
   }
 
 }
