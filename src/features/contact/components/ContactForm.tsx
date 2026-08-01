@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-
+import { Route } from "../../../routes/contact";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ArrowRight,
@@ -30,7 +30,7 @@ export function ContactForm({
   productId,
 }: ContactFormProps) {
   const createInquiry = useCreateInquiry();
-
+  const navigate = Route.useNavigate();
   const [submitted, setSubmitted] = useState(false);
 
   const {
@@ -102,7 +102,29 @@ export function ContactForm({
 
           <button
             type="button"
-            onClick={() => setSubmitted(false)}
+            onClick={() => {
+              setSubmitted(false);
+
+              if (productId) {
+                navigate({
+                  to: "/contact",
+                  search: () => ({}),
+                  replace: true,
+                });
+
+                return;
+              }
+
+              reset({
+                type: "general",
+                productId: undefined,
+                name: "",
+                email: "",
+                phone: "",
+                subject: "",
+                message: "",
+              });
+            }}
             className="mt-8 rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground transition hover:opacity-90"
           >
             Send Another Message
