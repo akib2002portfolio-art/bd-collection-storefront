@@ -1,5 +1,6 @@
 import type { Category } from "../../categories/types/category";
 import type { Product } from "../types/product";
+import { ProductCard } from "./ProductCard";
 import { ProductRow } from "./ProductRow";
 
 interface ProductsTableProps {
@@ -49,59 +50,46 @@ export function ProductsTable({
   }
 
   return (
-    <div className="overflow-x-auto rounded-xl border border-hairline bg-canvas shadow-sm">
-      <table className="min-w-full">
-        <thead className="border-b border-hairline bg-bone">
-          <tr className="text-left text-xs uppercase tracking-[0.22em] text-taupe">
-            <th className="px-6 py-5">
-              Product
-            </th>
+    <>
+      <div className="space-y-3 lg:hidden">
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            categories={categories}
+            onDelete={onDelete}
+          />
+        ))}
+      </div>
 
-            <th className="px-6 py-5">
-              Category
-            </th>
+      <div className="hidden overflow-x-auto rounded-xl border border-hairline bg-canvas shadow-sm lg:block">
+        <table className="min-w-full">
+          <thead className="border-b border-hairline bg-bone">
+            <tr className="text-left text-xs uppercase tracking-[0.22em] text-taupe">
+              <th className="px-6 py-5">Product</th>
+              <th className="px-6 py-5">Category</th>
+              <th className="px-6 py-5">SKU</th>
+              <th className="px-6 py-5">Price</th>
+              <th className="px-6 py-5">Stock</th>
+              <th className="px-6 py-5 text-center">Featured</th>
+              <th className="px-6 py-5 text-center">New</th>
+              <th className="px-6 py-5">Status</th>
+              <th className="px-6 py-5 text-right">Actions</th>
+            </tr>
+          </thead>
 
-            <th className="px-6 py-5">
-              SKU
-            </th>
-
-            <th className="px-6 py-5">
-              Price
-            </th>
-
-            <th className="px-6 py-5">
-              Stock
-            </th>
-
-            <th className="px-6 py-5 text-center">
-              Featured
-            </th>
-
-            <th className="px-6 py-5 text-center">
-              New
-            </th>
-
-            <th className="px-6 py-5">
-              Status
-            </th>
-
-            <th className="px-6 py-5 text-right">
-              Actions
-            </th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {products.map((product) => (
-            <ProductRow
-              key={product.id}
-              product={product}
-              categories={categories}
-              onDelete={onDelete}
-            />
-          ))}
-        </tbody>
-      </table>
-    </div>
+          <tbody>
+            {products.map((product) => (
+              <ProductRow
+                key={product.id}
+                product={product}
+                categories={categories}
+                onDelete={onDelete}
+              />
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }

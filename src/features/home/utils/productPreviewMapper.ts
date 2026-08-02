@@ -17,8 +17,7 @@ export function mapProductToPreview(
 
     thumbnail: product.imageUrl,
 
-    // We'll replace this with the real category name later
-    category: "",
+    category: product.categoryName,
 
     isNew: product.newArrival,
   };

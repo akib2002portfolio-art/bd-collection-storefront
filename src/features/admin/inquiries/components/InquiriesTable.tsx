@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { InquiryRow } from "./InquiryRow";
+import { InquiryCard } from "./InquiryCard";
 import { InquiryDetailDrawer } from "./InquiryDetailDrawer";
 
 import type { Inquiry } from "../../../contact/types";
@@ -68,35 +69,27 @@ export function InquiriesTable({
 
   return (
     <>
-      <div className="overflow-hidden rounded-xl border bg-card shadow-sm">
+      <div className="space-y-3 lg:hidden">
+        {inquiries.map((inquiry) => (
+          <InquiryCard
+            key={inquiry.id}
+            inquiry={inquiry}
+            onClick={() => openInquiry(inquiry)}
+          />
+        ))}
+      </div>
+
+      <div className="hidden overflow-hidden rounded-xl border bg-card shadow-sm lg:block">
         <div className="overflow-x-auto">
           <table className="w-full border-collapse">
-
             <thead className="bg-muted/50">
               <tr>
-                <th className="px-4 py-4 text-left text-sm font-semibold">
-                  Status
-                </th>
-
-                <th className="px-4 py-4 text-left text-sm font-semibold">
-                  Type
-                </th>
-
-                <th className="px-4 py-4 text-left text-sm font-semibold">
-                  Customer
-                </th>
-
-                <th className="px-4 py-4 text-left text-sm font-semibold">
-                  Product
-                </th>
-
-                <th className="px-4 py-4 text-left text-sm font-semibold">
-                  Subject
-                </th>
-
-                <th className="px-4 py-4 text-left text-sm font-semibold">
-                  Date
-                </th>
+                <th className="px-4 py-4 text-left text-sm font-semibold">Status</th>
+                <th className="px-4 py-4 text-left text-sm font-semibold">Type</th>
+                <th className="px-4 py-4 text-left text-sm font-semibold">Customer</th>
+                <th className="px-4 py-4 text-left text-sm font-semibold">Product</th>
+                <th className="px-4 py-4 text-left text-sm font-semibold">Subject</th>
+                <th className="px-4 py-4 text-left text-sm font-semibold">Date</th>
               </tr>
             </thead>
 
@@ -105,13 +98,10 @@ export function InquiriesTable({
                 <InquiryRow
                   key={inquiry.id}
                   inquiry={inquiry}
-                  onClick={() =>
-                    openInquiry(inquiry)
-                  }
+                  onClick={() => openInquiry(inquiry)}
                 />
               ))}
             </tbody>
-
           </table>
         </div>
       </div>

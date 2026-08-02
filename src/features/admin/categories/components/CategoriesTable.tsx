@@ -1,4 +1,5 @@
 import type { Category } from "../types/category";
+import { CategoryCard } from "./CategoryCard";
 import { CategoryRow } from "./CategoryRow";
 
 interface CategoriesTableProps {
@@ -45,38 +46,39 @@ export function CategoriesTable({
   }
 
   return (
-    <div className="overflow-hidden rounded-xl border border-hairline bg-canvas shadow-sm">
-      <table className="w-full">
-        <thead className="border-b border-hairline bg-bone">
-          <tr className="text-left text-xs uppercase tracking-[0.22em] text-taupe">
-            <th className="px-6 py-5">
-              Name
-            </th>
+    <>
+      <div className="space-y-3 lg:hidden">
+        {categories.map((category) => (
+          <CategoryCard
+            key={category.id}
+            category={category}
+            onRefresh={onRefresh}
+          />
+        ))}
+      </div>
 
-            <th className="px-6 py-5">
-              Slug
-            </th>
+      <div className="hidden overflow-hidden rounded-xl border border-hairline bg-canvas shadow-sm lg:block">
+        <table className="w-full">
+          <thead className="border-b border-hairline bg-bone">
+            <tr className="text-left text-xs uppercase tracking-[0.22em] text-taupe">
+              <th className="px-6 py-5">Name</th>
+              <th className="px-6 py-5">Slug</th>
+              <th className="px-6 py-5">Order</th>
+              <th className="px-6 py-5 text-right">Actions</th>
+            </tr>
+          </thead>
 
-            <th className="px-6 py-5">
-              Order
-            </th>
-
-            <th className="px-6 py-5 text-right">
-              Actions
-            </th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {categories.map((category) => (
-            <CategoryRow
-              key={category.id}
-              category={category}
-              onRefresh={onRefresh}
-            />
-          ))}
-        </tbody>
-      </table>
-    </div>
+          <tbody>
+            {categories.map((category) => (
+              <CategoryRow
+                key={category.id}
+                category={category}
+                onRefresh={onRefresh}
+              />
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }

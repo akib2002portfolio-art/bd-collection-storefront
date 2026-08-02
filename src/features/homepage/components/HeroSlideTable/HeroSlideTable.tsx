@@ -1,4 +1,5 @@
 import type { HeroSlide } from "../../types";
+import { HeroSlideCard } from "../HeroSlideCard/HeroSlideCard";
 import { HeroSlideRow } from "../HeroSlideRow/HeroSlideRow";
 
 interface HeroSlideTableProps {
@@ -45,42 +46,32 @@ export function HeroSlideTable({
   }
 
   return (
-    <div className="overflow-x-auto rounded-xl border border-hairline bg-canvas shadow-sm">
-      <table className="min-w-full">
-        <thead className="border-b border-hairline bg-bone">
-          <tr className="text-left text-xs uppercase tracking-[0.22em] text-taupe">
-            <th className="px-6 py-5">
-              Image
-            </th>
+    <>
+      <div className="space-y-3 lg:hidden">
+        {slides.map((slide) => (
+          <HeroSlideCard key={slide.id} slide={slide} onDelete={onDelete} />
+        ))}
+      </div>
 
-            <th className="px-6 py-5">
-              Title
-            </th>
+      <div className="hidden overflow-x-auto rounded-xl border border-hairline bg-canvas shadow-sm lg:block">
+        <table className="min-w-full">
+          <thead className="border-b border-hairline bg-bone">
+            <tr className="text-left text-xs uppercase tracking-[0.22em] text-taupe">
+              <th className="px-6 py-5">Image</th>
+              <th className="px-6 py-5">Title</th>
+              <th className="px-6 py-5">Order</th>
+              <th className="px-6 py-5">Status</th>
+              <th className="px-6 py-5 text-right">Actions</th>
+            </tr>
+          </thead>
 
-            <th className="px-6 py-5">
-              Order
-            </th>
-
-            <th className="px-6 py-5">
-              Status
-            </th>
-
-            <th className="px-6 py-5 text-right">
-              Actions
-            </th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {slides.map((slide) => (
-            <HeroSlideRow
-              key={slide.id}
-              slide={slide}
-              onDelete={onDelete}
-            />
-          ))}
-        </tbody>
-      </table>
-    </div>
+          <tbody>
+            {slides.map((slide) => (
+              <HeroSlideRow key={slide.id} slide={slide} onDelete={onDelete} />
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }

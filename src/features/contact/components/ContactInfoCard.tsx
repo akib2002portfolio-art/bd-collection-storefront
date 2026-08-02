@@ -23,13 +23,12 @@ export function ContactInfoCard({
   const content = (
     <div className="flex h-full flex-col">
       {/* Header */}
-
       <div className="flex items-center justify-between">
         <div
           className="
             flex
-            h-10
-            w-10
+            h-11
+            w-11
             items-center
             justify-center
             rounded-full
@@ -61,31 +60,29 @@ export function ContactInfoCard({
       </div>
 
       {/* Body */}
-
       <div className="mt-6 flex-1">
-        <p className="text-sm font-medium text-muted-foreground">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
           {title}
         </p>
 
-        <h3
+        <p
           className={`
             mt-2
-            text-lg
+            text-base
             font-semibold
             leading-snug
+            tracking-tight
+            text-foreground
             transition-colors
             duration-300
             group-hover:text-primary
+            [overflow-wrap:anywhere]
 
-            ${
-              breakMode === "email"
-                ? "break-all"
-                : "break-words whitespace-pre-line"
-            }
+            ${breakMode === "email" ? "" : "whitespace-pre-line"}
           `}
         >
           {value}
-        </h3>
+        </p>
 
         <p className="mt-3 text-sm leading-6 text-muted-foreground">
           {subtitle}
@@ -95,12 +92,9 @@ export function ContactInfoCard({
   );
 
   return (
-    <ContactCard className="h-full p-5">
+    <ContactCard className="h-full p-6">
       {href ? (
-        <a
-          href={href}
-          className="block h-full"
-        >
+        <a href={href} className="block h-full">
           {content}
         </a>
       ) : (
