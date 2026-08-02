@@ -34,6 +34,8 @@ export interface Inquiry {
     name: string;
     sku: string;
     imageUrl: string | null;
+    price: number | null;
+    currency: string | null;
     category?: {
       id: string;
       name: string;

@@ -19,6 +19,8 @@ class InquiryService {
       name,
       sku,
       image_url,
+      price,
+      currency,
       category:categories (
         id,
         name
@@ -52,6 +54,8 @@ class InquiryService {
           name: item.product.name,
           sku: item.product.sku,
           imageUrl: item.product.image_url,
+          price: item.product.price,
+          currency: item.product.currency,
           category: item.product.category
             ? {
               id: item.product.category.id,

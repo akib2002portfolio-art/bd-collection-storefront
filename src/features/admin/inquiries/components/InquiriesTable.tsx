@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
 
 import { InquiryRow } from "./InquiryRow";
 import { InquiryCard } from "./InquiryCard";
-import { InquiryDetailDrawer } from "./InquiryDetailDrawer";
 
 import type { Inquiry } from "../../../contact/types";
 
@@ -17,20 +16,13 @@ export function InquiriesTable({
   isLoading,
   isError,
 }: InquiriesTableProps) {
-  const [selectedInquiry, setSelectedInquiry] =
-    useState<Inquiry | null>(null);
-
-  const [drawerOpen, setDrawerOpen] =
-    useState(false);
+  const navigate = useNavigate();
 
   function openInquiry(inquiry: Inquiry) {
-    setSelectedInquiry(inquiry);
-    setDrawerOpen(true);
-  }
-
-  function closeDrawer() {
-    setDrawerOpen(false);
-    setSelectedInquiry(null);
+    navigate({
+      to: "/admin/inquiry/$id",
+      params: { id: inquiry.id },
+    });
   }
 
   if (isLoading) {
@@ -105,12 +97,6 @@ export function InquiriesTable({
           </table>
         </div>
       </div>
-
-      <InquiryDetailDrawer
-        inquiry={selectedInquiry}
-        open={drawerOpen}
-        onClose={closeDrawer}
-      />
     </>
   );
 }

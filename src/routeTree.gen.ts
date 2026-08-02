@@ -28,6 +28,7 @@ import { Route as AdminHomepageRouteImport } from './routes/admin/homepage'
 import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
 import { Route as AdminCategoriesRouteImport } from './routes/admin/categories'
 import { Route as AdminAboutRouteImport } from './routes/admin/about'
+import { Route as AdminInquiryIdRouteImport } from './routes/admin/inquiry/$id'
 import { Route as AdminEditProductIdRouteImport } from './routes/admin/edit-product/$id'
 import { Route as AdminEditHeroIdRouteImport } from './routes/admin/edit-hero/$id'
 import { Route as AdminEditCategoryIdRouteImport } from './routes/admin/edit-category.$id'
@@ -127,6 +128,11 @@ const AdminAboutRoute = AdminAboutRouteImport.update({
   path: '/admin/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminInquiryIdRoute = AdminInquiryIdRouteImport.update({
+  id: '/admin/inquiry/$id',
+  path: '/admin/inquiry/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminEditProductIdRoute = AdminEditProductIdRouteImport.update({
   id: '/admin/edit-product/$id',
   path: '/admin/edit-product/$id',
@@ -166,6 +172,7 @@ export interface FileRoutesByFullPath {
   '/admin/edit-category/$id': typeof AdminEditCategoryIdRoute
   '/admin/edit-hero/$id': typeof AdminEditHeroIdRoute
   '/admin/edit-product/$id': typeof AdminEditProductIdRoute
+  '/admin/inquiry/$id': typeof AdminInquiryIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -190,6 +197,7 @@ export interface FileRoutesByTo {
   '/admin/edit-category/$id': typeof AdminEditCategoryIdRoute
   '/admin/edit-hero/$id': typeof AdminEditHeroIdRoute
   '/admin/edit-product/$id': typeof AdminEditProductIdRoute
+  '/admin/inquiry/$id': typeof AdminInquiryIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -215,6 +223,7 @@ export interface FileRoutesById {
   '/admin/edit-category/$id': typeof AdminEditCategoryIdRoute
   '/admin/edit-hero/$id': typeof AdminEditHeroIdRoute
   '/admin/edit-product/$id': typeof AdminEditProductIdRoute
+  '/admin/inquiry/$id': typeof AdminInquiryIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -241,6 +250,7 @@ export interface FileRouteTypes {
     | '/admin/edit-category/$id'
     | '/admin/edit-hero/$id'
     | '/admin/edit-product/$id'
+    | '/admin/inquiry/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -265,6 +275,7 @@ export interface FileRouteTypes {
     | '/admin/edit-category/$id'
     | '/admin/edit-hero/$id'
     | '/admin/edit-product/$id'
+    | '/admin/inquiry/$id'
   id:
     | '__root__'
     | '/'
@@ -289,6 +300,7 @@ export interface FileRouteTypes {
     | '/admin/edit-category/$id'
     | '/admin/edit-hero/$id'
     | '/admin/edit-product/$id'
+    | '/admin/inquiry/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -314,6 +326,7 @@ export interface RootRouteChildren {
   AdminEditCategoryIdRoute: typeof AdminEditCategoryIdRoute
   AdminEditHeroIdRoute: typeof AdminEditHeroIdRoute
   AdminEditProductIdRoute: typeof AdminEditProductIdRoute
+  AdminInquiryIdRoute: typeof AdminInquiryIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -451,6 +464,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/inquiry/$id': {
+      id: '/admin/inquiry/$id'
+      path: '/admin/inquiry/$id'
+      fullPath: '/admin/inquiry/$id'
+      preLoaderRoute: typeof AdminInquiryIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/edit-product/$id': {
       id: '/admin/edit-product/$id'
       path: '/admin/edit-product/$id'
@@ -498,6 +518,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminEditCategoryIdRoute: AdminEditCategoryIdRoute,
   AdminEditHeroIdRoute: AdminEditHeroIdRoute,
   AdminEditProductIdRoute: AdminEditProductIdRoute,
+  AdminInquiryIdRoute: AdminInquiryIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
