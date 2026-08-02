@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Loader2 } from "lucide-react";
 import { AdminLayout } from "../../admin/shared";
 import { SiteSettingsForm } from "../components";
@@ -17,10 +16,6 @@ export function SiteSettingsPage() {
 
     const updateMutation =
         useUpdateSiteSettings();
-
-    useEffect(() => {
-        document.title = "Site Settings";
-    }, []);
 
     if (isLoading) {
         return (

@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 
 import { ProductForm } from "../../features/admin/products/components/ProductForm";
 import { useProducts } from "../../features/admin/products/hooks/useProducts";
+import { AdminLayout } from "../../features/admin/shared";
 
 export const Route = createFileRoute("/admin/new-product")({
     component: NewProductPage,
@@ -33,20 +34,11 @@ function NewProductPage() {
     }
 
     return (
-        <div className="space-y-8">
-            <div>
-                <h1 className="font-display text-4xl text-ink">
-                    New Product
-                </h1>
-
-                <p className="mt-2 text-taupe">
-                    Create a new product for your store.
-                </p>
-            </div>
-
-            <ProductForm
-                onSubmit={handleSubmit}
-            />
-        </div>
+        <AdminLayout
+            title="New Product"
+            subtitle="Create a new product for your store."
+        >
+            <ProductForm onSubmit={handleSubmit} />
+        </AdminLayout>
     );
 }

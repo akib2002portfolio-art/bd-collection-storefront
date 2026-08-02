@@ -1,7 +1,6 @@
-import { useEffect } from "react";
+﻿import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "../../../../components/ui/button";
 import { FormField } from "../../../../components/ui/FormField";
 
 import {
@@ -47,15 +46,16 @@ export function AboutForm({
   function handleReset() {
     reset(initialValues);
   }
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mx-auto max-w-5xl space-y-8"
+      className="mx-auto max-w-5xl space-y-8 rounded-xl border border-hairline bg-canvas p-8"
     >
       {/* Hero */}
 
-      <section className="rounded-xl border bg-white p-6 shadow-sm space-y-6">
-        <div className="space-y-1 border-b pb-4">
+      <section className="space-y-6">
+        <div className="space-y-1 border-b border-hairline pb-4">
           <h3 className="text-lg font-semibold">
             Hero Section
           </h3>
@@ -71,7 +71,7 @@ export function AboutForm({
         >
           <input
             {...register("eyebrow")}
-            className="w-full rounded-md border px-3 py-2"
+            className="w-full rounded-md border border-hairline px-4 py-3"
           />
         </FormField>
 
@@ -81,7 +81,7 @@ export function AboutForm({
         >
           <input
             {...register("title")}
-            className="w-full rounded-md border px-3 py-2"
+            className="w-full rounded-md border border-hairline px-4 py-3"
           />
         </FormField>
 
@@ -92,15 +92,15 @@ export function AboutForm({
           <textarea
             rows={4}
             {...register("shortDescription")}
-            className="w-full rounded-md border px-3 py-2"
+            className="w-full rounded-md border border-hairline px-4 py-3"
           />
         </FormField>
       </section>
 
       {/* Story */}
 
-      <section className="rounded-xl border bg-white p-6 shadow-sm space-y-6">
-        <div className="space-y-1 border-b pb-4">
+      <section className="space-y-6">
+        <div className="space-y-1 border-b border-hairline pb-4">
           <h3 className="text-lg font-semibold">
             Company Story
           </h3>
@@ -117,7 +117,7 @@ export function AboutForm({
           <textarea
             rows={8}
             {...register("story")}
-            className="w-full rounded-md border px-3 py-2"
+            className="w-full rounded-md border border-hairline px-4 py-3"
           />
         </FormField>
 
@@ -128,7 +128,7 @@ export function AboutForm({
           <textarea
             rows={4}
             {...register("mission")}
-            className="w-full rounded-md border px-3 py-2"
+            className="w-full rounded-md border border-hairline px-4 py-3"
           />
         </FormField>
 
@@ -139,15 +139,15 @@ export function AboutForm({
           <textarea
             rows={4}
             {...register("vision")}
-            className="w-full rounded-md border px-3 py-2"
+            className="w-full rounded-md border border-hairline px-4 py-3"
           />
         </FormField>
       </section>
 
       {/* Statistics */}
 
-      <section className="rounded-xl border bg-white p-6 shadow-sm space-y-6">
-        <div className="space-y-1 border-b pb-4">
+      <section className="space-y-6">
+        <div className="space-y-1 border-b border-hairline pb-4">
           <h3 className="text-lg font-semibold">
             Statistics
           </h3>
@@ -158,7 +158,6 @@ export function AboutForm({
         </div>
 
         <div className="grid gap-8 md:grid-cols-3">
-
           <FormField
             label="Years Experience"
             error={errors.yearsExperience}
@@ -168,7 +167,7 @@ export function AboutForm({
               {...register("yearsExperience", {
                 valueAsNumber: true,
               })}
-              className="w-full rounded-md border px-3 py-2"
+              className="w-full rounded-md border border-hairline px-4 py-3"
             />
           </FormField>
 
@@ -181,7 +180,7 @@ export function AboutForm({
               {...register("happyCustomers", {
                 valueAsNumber: true,
               })}
-              className="w-full rounded-md border px-3 py-2"
+              className="w-full rounded-md border border-hairline px-4 py-3"
             />
           </FormField>
 
@@ -194,17 +193,16 @@ export function AboutForm({
               {...register("productsCount", {
                 valueAsNumber: true,
               })}
-              className="w-full rounded-md border px-3 py-2"
+              className="w-full rounded-md border border-hairline px-4 py-3"
             />
           </FormField>
-
         </div>
       </section>
 
       {/* Images */}
 
-      <section className="rounded-xl border bg-white p-6 shadow-sm space-y-6">
-        <div className="space-y-1 border-b pb-4">
+      <section className="space-y-6">
+        <div className="space-y-1 border-b border-hairline pb-4">
           <h3 className="text-lg font-semibold">
             Images
           </h3>
@@ -215,7 +213,6 @@ export function AboutForm({
         </div>
 
         <div className="grid gap-10 lg:grid-cols-2">
-
           <FormField label="Hero Image">
             <Controller
               control={control}
@@ -247,14 +244,13 @@ export function AboutForm({
               )}
             />
           </FormField>
-
         </div>
       </section>
 
       {/* SEO */}
 
-      <section className="rounded-xl border bg-white p-6 shadow-sm space-y-6">
-        <div className="space-y-1 border-b pb-4">
+      <section className="space-y-6">
+        <div className="space-y-1 border-b border-hairline pb-4">
           <h3 className="text-lg font-semibold">
             SEO
           </h3>
@@ -270,7 +266,7 @@ export function AboutForm({
         >
           <input
             {...register("metaTitle")}
-            className="w-full rounded-md border px-3 py-2"
+            className="w-full rounded-md border border-hairline px-4 py-3"
           />
         </FormField>
 
@@ -281,28 +277,28 @@ export function AboutForm({
           <textarea
             rows={4}
             {...register("metaDescription")}
-            className="w-full rounded-md border px-3 py-2"
+            className="w-full rounded-md border border-hairline px-4 py-3"
           />
         </FormField>
       </section>
 
       <div className="flex items-center gap-3 pt-6">
-        <Button
+        <button
           type="submit"
           disabled={loading || !isDirty}
+          className="rounded-md bg-ink px-6 py-3 text-canvas transition hover:bg-sienna disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading ? "Saving..." : "Save Changes"}
-        </Button>
+        </button>
 
-        <Button
+        <button
           type="button"
-          variant="outline"
           onClick={handleReset}
           disabled={loading}
+          className="rounded-md border border border-hairline px-6 py-3 transition hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50"
         >
           Reset
-        </Button>
-
+        </button>
       </div>
     </form>
   );

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+﻿import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -137,7 +137,7 @@ export function SiteSettingsForm({
     return (
         <form
             onSubmit={handleSubmit(submit)}
-            className="space-y-10"
+            className="space-y-10 rounded-xl border border-hairline bg-canvas p-8"
         >
             {/* -------------------------------- */}
             {/* Branding */}
@@ -155,7 +155,7 @@ export function SiteSettingsForm({
                     <input
                         {...register("storeName")}
                         disabled={loading}
-                        className="w-full rounded-md border px-3 py-2 disabled:opacity-50"
+                        className="w-full rounded-md border border-hairline px-4 py-3 disabled:opacity-50"
                     />
                 </FormField>
 
@@ -167,7 +167,7 @@ export function SiteSettingsForm({
                         {...register("tagline")}
                         placeholder="Premium Fashion for Every Occasion"
                         disabled={loading}
-                        className="w-full rounded-md border px-3 py-2 disabled:opacity-50"
+                        className="w-full rounded-md border border-hairline px-4 py-3 disabled:opacity-50"
                     />
                 </FormField>
 
@@ -184,7 +184,7 @@ Example:
 
 BD Collection offers premium fashion for men, women and children with delivery across Bangladesh.`}
                         disabled={loading}
-                        className="w-full rounded-md border px-3 py-2 disabled:opacity-50"
+                        className="w-full rounded-md border border-hairline px-4 py-3 disabled:opacity-50"
                     />
                 </FormField>
 
@@ -196,7 +196,7 @@ BD Collection offers premium fashion for men, women and children with delivery a
                         {...register("browserTitle")}
                         placeholder="BD Collection"
                         disabled={loading}
-                        className="w-full rounded-md border px-3 py-2 disabled:opacity-50"
+                        className="w-full rounded-md border border-hairline px-4 py-3 disabled:opacity-50"
                     />
                 </FormField>
 
@@ -251,7 +251,7 @@ BD Collection offers premium fashion for men, women and children with delivery a
                         <input
                             {...register("phone")}
                             disabled={loading}
-                            className="w-full rounded-md border px-3 py-2 disabled:opacity-50"
+                            className="w-full rounded-md border border-hairline px-4 py-3 disabled:opacity-50"
                         />
                     </FormField>
 
@@ -263,7 +263,7 @@ BD Collection offers premium fashion for men, women and children with delivery a
                             type="email"
                             {...register("email")}
                             disabled={loading}
-                            className="w-full rounded-md border px-3 py-2 disabled:opacity-50"
+                            className="w-full rounded-md border border-hairline px-4 py-3 disabled:opacity-50"
                         />
                     </FormField>
                 </div>
@@ -276,7 +276,7 @@ BD Collection offers premium fashion for men, women and children with delivery a
                         type="email"
                         {...register("contactEmail")}
                         disabled={loading}
-                        className="w-full rounded-md border px-3 py-2 disabled:opacity-50"
+                        className="w-full rounded-md border border-hairline px-4 py-3 disabled:opacity-50"
                     />
                 </FormField>
 
@@ -288,7 +288,7 @@ BD Collection offers premium fashion for men, women and children with delivery a
                         {...register("address")}
                         rows={3}
                         disabled={loading}
-                        className="w-full rounded-md border px-3 py-2 disabled:opacity-50"
+                        className="w-full rounded-md border border-hairline px-4 py-3 disabled:opacity-50"
                     />
                 </FormField>
 
@@ -300,7 +300,7 @@ BD Collection offers premium fashion for men, women and children with delivery a
                         {...register("businessHours")}
                         rows={3}
                         disabled={loading}
-                        className="w-full rounded-md border px-3 py-2 disabled:opacity-50"
+                        className="w-full rounded-md border border-hairline px-4 py-3 disabled:opacity-50"
                     />
                 </FormField>
             </section>
@@ -322,7 +322,7 @@ BD Collection offers premium fashion for men, women and children with delivery a
                         <input
                             {...register("facebook")}
                             disabled={loading}
-                            className="w-full rounded-md border px-3 py-2 disabled:opacity-50"
+                            className="w-full rounded-md border border-hairline px-4 py-3 disabled:opacity-50"
                         />
                     </FormField>
 
@@ -333,7 +333,7 @@ BD Collection offers premium fashion for men, women and children with delivery a
                         <input
                             {...register("instagram")}
                             disabled={loading}
-                            className="w-full rounded-md border px-3 py-2 disabled:opacity-50"
+                            className="w-full rounded-md border border-hairline px-4 py-3 disabled:opacity-50"
                         />
                     </FormField>
 
@@ -344,7 +344,7 @@ BD Collection offers premium fashion for men, women and children with delivery a
                         <input
                             {...register("whatsapp")}
                             disabled={loading}
-                            className="w-full rounded-md border px-3 py-2 disabled:opacity-50"
+                            className="w-full rounded-md border border-hairline px-4 py-3 disabled:opacity-50"
                         />
                     </FormField>
 
@@ -355,7 +355,7 @@ BD Collection offers premium fashion for men, women and children with delivery a
                         <input
                             {...register("linkedin")}
                             disabled={loading}
-                            className="w-full rounded-md border px-3 py-2 disabled:opacity-50"
+                            className="w-full rounded-md border border-hairline px-4 py-3 disabled:opacity-50"
                         />
                     </FormField>
 
@@ -366,7 +366,7 @@ BD Collection offers premium fashion for men, women and children with delivery a
                         <input
                             {...register("youtube")}
                             disabled={loading}
-                            className="w-full rounded-md border px-3 py-2 disabled:opacity-50"
+                            className="w-full rounded-md border border-hairline px-4 py-3 disabled:opacity-50"
                         />
                     </FormField>
                 </div>
@@ -392,7 +392,7 @@ BD Collection offers premium fashion for men, women and children with delivery a
 
 We appreciate your trust and support.`}
                         disabled={loading}
-                        className="w-full rounded-md border px-3 py-2 disabled:opacity-50"
+                        className="w-full rounded-md border border-hairline px-4 py-3 disabled:opacity-50"
                     />
                 </FormField>
 
@@ -402,9 +402,9 @@ We appreciate your trust and support.`}
                 >
                     <input
                         {...register("copyrightText")}
-                        placeholder="© 2026 BD Collection. All rights reserved."
+                        placeholder="Â© 2026 BD Collection. All rights reserved."
                         disabled={loading}
-                        className="w-full rounded-md border px-3 py-2 disabled:opacity-50"
+                        className="w-full rounded-md border border-hairline px-4 py-3 disabled:opacity-50"
                     />
                 </FormField>
             </section>
@@ -417,7 +417,7 @@ We appreciate your trust and support.`}
                 <button
                     type="submit"
                     disabled={loading || !isDirty}
-                    className="rounded-md bg-black px-5 py-2 text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-50"
+                    className="rounded-md bg-ink px-6 py-3 text-canvas transition hover:bg-sienna disabled:cursor-not-allowed disabled:opacity-50"
                 >
                     {loading ? "Saving..." : "Save Changes"}
                 </button>
@@ -426,7 +426,7 @@ We appreciate your trust and support.`}
                     type="button"
                     disabled={loading}
                     onClick={handleReset}
-                    className="rounded-md border border-hairline px-5 py-2 transition-colors hover:bg-bone disabled:cursor-not-allowed disabled:opacity-50"
+                    className="rounded-md border border-hairline px-6 py-3 transition hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50"
                 >
                     Reset
                 </button>

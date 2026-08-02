@@ -9,6 +9,7 @@ import {
 
 import { ProductForm } from "../../../features/admin/products/components/ProductForm";
 import { useProducts } from "../../../features/admin/products/hooks/useProducts";
+import { AdminLayout } from "../../../features/admin/shared";
 import type {
   Product,
   CreateProductInput,
@@ -86,39 +87,30 @@ function EditProductPage() {
     }
   }
 
-  if (loading) {
-    return (
-      <div className="rounded-xl border border-hairline bg-canvas p-8 text-center">
-        Loading product...
-      </div>
-    );
-  }
-
-  if (!product) {
-    return (
-      <div className="rounded-xl border border-red-200 bg-red-50 p-8 text-center text-red-600">
-        Product not found.
-      </div>
-    );
-  }
-
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="font-display text-4xl text-ink">
-          Edit Product
-        </h1>
+    <AdminLayout
+      title="Edit Product"
+      subtitle="Update your product information."
+    >
+      {loading && (
+        <div className="rounded-xl border-hairline bg-canvas p-8 text-center">
+          Loading product...
+        </div>
+      )}
 
-        <p className="mt-2 text-taupe">
-          Update your product information.
-        </p>
-      </div>
+      {!loading && !product && (
+        <div className="rounded-xl border border-red-200 bg-red-50 p-8 text-center text-red-600">
+          Product not found.
+        </div>
+      )}
 
-      <ProductForm
-        initialData={product}
-        loading={saving}
-        onSubmit={handleSubmit}
-      />
-    </div>
+      {!loading && product && (
+        <ProductForm
+          initialData={product}
+          loading={saving}
+          onSubmit={handleSubmit}
+        />
+      )}
+    </AdminLayout>
   );
 }
