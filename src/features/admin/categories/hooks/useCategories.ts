@@ -1,3 +1,4 @@
+import { useQueryClient } from "@tanstack/react-query";
 import {
   useCallback,
   useEffect,
@@ -37,6 +38,8 @@ export interface UseCategoriesResult {
 }
 
 export function useCategories(): UseCategoriesResult {
+  const queryClient = useQueryClient();
+
   const [categories, setCategories] =
     useState<Category[]>([]);
 
@@ -88,9 +91,16 @@ export function useCategories(): UseCategoriesResult {
           ...previous,
         ]);
 
+        await queryClient.invalidateQueries({
+          queryKey: ["categories"],
+        });
+        await queryClient.invalidateQueries({
+          queryKey: ["category"],
+        });
+
         return created;
       },
-      [],
+      [queryClient],
     );
 
   const updateCategory =
@@ -111,9 +121,16 @@ export function useCategories(): UseCategoriesResult {
           ),
         );
 
+        await queryClient.invalidateQueries({
+          queryKey: ["categories"],
+        });
+        await queryClient.invalidateQueries({
+          queryKey: ["category"],
+        });
+
         return updated;
       },
-      [],
+      [queryClient],
     );
 
   const deleteCategory =
@@ -126,7 +143,14 @@ export function useCategories(): UseCategoriesResult {
             category.id !== id,
         ),
       );
-    }, []);
+
+      await queryClient.invalidateQueries({
+        queryKey: ["categories"],
+      });
+      await queryClient.invalidateQueries({
+        queryKey: ["category"],
+      });
+    }, [queryClient]);
 
   useEffect(() => {
     void refresh();

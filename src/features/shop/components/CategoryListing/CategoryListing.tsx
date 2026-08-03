@@ -1,3 +1,4 @@
+import { useDocumentTitle } from "../../../../hooks/useDocumentTitle";
 import { ShopHeader } from "../ShopHeader";
 import { ProductGrid } from "../ProductGrid";
 
@@ -11,6 +12,8 @@ interface CategoryListingProps {
 export function CategoryListing({
   slug,
 }: CategoryListingProps) {
+  useDocumentTitle(undefined);
+
   const {
     data: category,
     isLoading: categoryLoading,
@@ -22,6 +25,8 @@ export function CategoryListing({
     isLoading: productsLoading,
     isError: productsError,
   } = useProductsByCategory(category?.id);
+
+  useDocumentTitle(category?.name);
 
   if (categoryLoading || productsLoading) {
     return (

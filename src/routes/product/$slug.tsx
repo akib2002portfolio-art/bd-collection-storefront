@@ -3,6 +3,7 @@ import { RelatedProducts } from "../../features/shop/components/RelatedProducts"
 import { ProductGallery } from "../../features/shop/components/ProductGallery";
 import { ProductInfo } from "../../features/shop/components/ProductInfo";
 import { useProduct } from "../../features/shop/hooks/useProduct";
+import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 
 export const Route = createFileRoute("/product/$slug")({
   component: ProductDetailsPage,
@@ -16,6 +17,8 @@ function ProductDetailsPage() {
     isLoading,
     error,
   } = useProduct(slug);
+
+  useDocumentTitle(product?.name);
 
   if (isLoading) {
     return (

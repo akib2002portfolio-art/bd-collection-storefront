@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from "react";
 
+import { useDocumentTitle } from "../../../../hooks/useDocumentTitle";
 import { useInquiries } from "../../../contact/hooks";
 
 import { AdminSidebar } from "./AdminSidebar";
@@ -16,6 +17,8 @@ export function AdminLayout({
   subtitle,
   children,
 }: AdminLayoutProps) {
+  useDocumentTitle(title);
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const { data: inquiries = [] } = useInquiries();

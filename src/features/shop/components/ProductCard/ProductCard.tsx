@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { useState } from "react";
 
 import { PlaceholderImage } from "../../../../components/ui/placeholder-image";
 import { formatPrice } from "../../../../lib/format";
@@ -19,8 +18,6 @@ export function ProductCard({
   aspect = "4/5",
   className,
 }: ProductCardProps) {
-  const [hover, setHover] = useState(false);
-
   return (
     <motion.article
       layout
@@ -28,8 +25,6 @@ export function ProductCard({
         "group relative overflow-hidden rounded-2xl",
         className,
       )}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
     >
       <Link
         to="/product/$slug"
@@ -56,9 +51,7 @@ export function ProductCard({
           )}
 
           <motion.div
-            animate={{
-              scale: hover ? 1.06 : 1,
-            }}
+            whileHover={{ scale: 1.06 }}
             transition={{
               duration: 0.7,
               ease: [0.22, 1, 0.36, 1],
@@ -81,30 +74,18 @@ export function ProductCard({
 
           <motion.div
             initial={false}
-            animate={{
-              opacity: hover ? 1 : 0,
-            }}
+            whileHover={{ opacity: 1 }}
             transition={{
               duration: 0.25,
             }}
-            className="absolute inset-0 bg-black/15"
+            className="absolute inset-0 bg-black/15 opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
           />
 
-          <motion.div
-            initial={false}
-            animate={{
-              opacity: hover ? 1 : 0,
-              y: hover ? 0 : 12,
-            }}
-            transition={{
-              duration: 0.3,
-            }}
-            className="absolute inset-x-4 bottom-4"
-          >
+          <div className="absolute inset-x-4 bottom-4 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
             <div className="flex h-11 items-center justify-center rounded-xl bg-white font-medium text-sm shadow-lg">
               View Details
             </div>
-          </motion.div>
+          </div>
         </div>
 
         <div className="space-y-2 px-1 pt-5">

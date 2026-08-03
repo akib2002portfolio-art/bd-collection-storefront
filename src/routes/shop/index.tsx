@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import { ShopLanding } from "../../features/shop/components/ShopLanding";
 
 export const Route = createFileRoute("/shop/")({
@@ -7,5 +8,7 @@ export const Route = createFileRoute("/shop/")({
 });
 
 function ShopPage() {
+  useDocumentTitle("Shop");
+
   return <ShopLanding />;
 }

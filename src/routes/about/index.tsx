@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
+import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import { useAbout } from "../../features/about/hooks";
 
 export const Route = createFileRoute("/about/")({
@@ -9,6 +10,8 @@ export const Route = createFileRoute("/about/")({
 });
 
 function AboutPage() {
+  useDocumentTitle("About");
+
   const {
     data: about,
     isLoading,

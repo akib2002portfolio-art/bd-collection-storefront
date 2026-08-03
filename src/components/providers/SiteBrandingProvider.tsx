@@ -8,12 +8,6 @@ export function SiteBrandingProvider() {
   useEffect(() => {
     if (!settings) return;
 
-    // Browser title
-    document.title =
-      settings.browserTitle?.trim() ||
-      settings.storeName ||
-      "BD Collection";
-
     // Favicon
     if (settings.faviconUrl?.trim()) {
       let link = document.querySelector(

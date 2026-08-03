@@ -1,3 +1,4 @@
+import { useQueryClient } from "@tanstack/react-query";
 import {
   useCallback,
   useEffect,
@@ -36,6 +37,8 @@ export interface UseProductsResult {
 }
 
 export function useProducts(): UseProductsResult {
+  const queryClient = useQueryClient();
+
   const [products, setProducts] =
     useState<Product[]>([]);
 
@@ -83,9 +86,16 @@ export function useProducts(): UseProductsResult {
         ...previous,
       ]);
 
+      await queryClient.invalidateQueries({
+        queryKey: ["products"],
+      });
+      await queryClient.invalidateQueries({
+        queryKey: ["product"],
+      });
+
       return created;
     },
-    [],
+    [queryClient],
   );
 
   const updateProduct = useCallback(
@@ -105,9 +115,16 @@ export function useProducts(): UseProductsResult {
         ),
       );
 
+      await queryClient.invalidateQueries({
+        queryKey: ["products"],
+      });
+      await queryClient.invalidateQueries({
+        queryKey: ["product"],
+      });
+
       return updated;
     },
-    [],
+    [queryClient],
   );
 
   const deleteProduct = useCallback(
@@ -119,8 +136,15 @@ export function useProducts(): UseProductsResult {
           (product) => product.id !== id,
         ),
       );
+
+      await queryClient.invalidateQueries({
+        queryKey: ["products"],
+      });
+      await queryClient.invalidateQueries({
+        queryKey: ["product"],
+      });
     },
-    [],
+    [queryClient],
   );
 
   useEffect(() => {

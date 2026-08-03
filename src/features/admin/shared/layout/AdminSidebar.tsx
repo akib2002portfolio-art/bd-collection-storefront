@@ -71,7 +71,7 @@ export function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
 
     try {
       await logout();
-      navigate({ to: "/" });
+      navigate({ to: "/", replace: true });
     } catch (error) {
       console.error(error);
       alert("Failed to logout.");

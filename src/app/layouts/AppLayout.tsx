@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import type { PropsWithChildren } from "react";
 import { useRouterState } from "@tanstack/react-router";
 
@@ -6,6 +6,7 @@ import { Header } from "../../components/layout/Header";
 import { Footer } from "../../components/layout/Footer";
 import { LoadingScreen } from "../../components/layout/LoadingScreen";
 import { SiteBrandingProvider } from "../../components/providers/SiteBrandingProvider";
+import { useSiteSettings } from "../../features/settings/hooks";
 
 export default function AppLayout({
   children,
@@ -16,8 +17,14 @@ export default function AppLayout({
     select: (state) => state.location.pathname,
   });
 
+  const { data: settings } = useSiteSettings();
+
   const isHomePage = pathname === "/";
   const isAdminRoute = pathname.startsWith("/admin");
+
+  useLayoutEffect(() => {
+    document.title = settings?.storeName || "BD Collection";
+  }, [pathname, settings]);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
