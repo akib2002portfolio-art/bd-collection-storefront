@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
-import { useDocumentTitle } from "../../hooks/useDocumentTitle";
+import { useSeoMetadata } from "../../hooks/useSeoMetadata";
 import { useAbout } from "../../features/about/hooks";
 
 export const Route = createFileRoute("/about/")({
@@ -10,7 +10,11 @@ export const Route = createFileRoute("/about/")({
 });
 
 function AboutPage() {
-  useDocumentTitle("About");
+  useSeoMetadata({
+    title: "About | BD Collection",
+    description: "Learn about BD Collection's story, mission, and vision. Discover premium fashion crafted for modern lifestyles.",
+    canonical: "/about",
+  });
 
   const {
     data: about,

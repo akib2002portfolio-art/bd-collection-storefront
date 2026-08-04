@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { useDocumentTitle } from "../../hooks/useDocumentTitle";
+import { useSeoMetadata } from "../../hooks/useSeoMetadata";
 import { ShopLanding } from "../../features/shop/components/ShopLanding";
 
 export const Route = createFileRoute("/shop/")({
@@ -8,7 +8,15 @@ export const Route = createFileRoute("/shop/")({
 });
 
 function ShopPage() {
-  useDocumentTitle("Shop");
+  useSeoMetadata({
+    title: "Shop | BD Collection",
+    description: "Shop curated fashion collections and premium garments at BD Collection. Browse categories, featured products, and new arrivals.",
+    canonical: "/shop",
+    openGraph: {
+      title: "Shop | BD Collection",
+      description: "Shop curated fashion collections and premium garments at BD Collection.",
+    },
+  });
 
   return <ShopLanding />;
 }

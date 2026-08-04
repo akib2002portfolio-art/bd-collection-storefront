@@ -3,7 +3,7 @@ import { RelatedProducts } from "../../features/shop/components/RelatedProducts"
 import { ProductGallery } from "../../features/shop/components/ProductGallery";
 import { ProductInfo } from "../../features/shop/components/ProductInfo";
 import { useProduct } from "../../features/shop/hooks/useProduct";
-import { useDocumentTitle } from "../../hooks/useDocumentTitle";
+import { useSeoMetadata } from "../../hooks/useSeoMetadata";
 
 export const Route = createFileRoute("/product/$slug")({
   component: ProductDetailsPage,
@@ -18,7 +18,16 @@ function ProductDetailsPage() {
     error,
   } = useProduct(slug);
 
-  useDocumentTitle(product?.name);
+  useSeoMetadata({
+    title: product ? `${product.name} | BD Collection` : "Product | BD Collection",
+    description: product?.shortDescription || "Browse premium fashion products at BD Collection.",
+    canonical: product ? `/product/${product.slug}` : `/product/${slug}`,
+    openGraph: {
+      title: product ? `${product.name} | BD Collection` : "BD Collection Product",
+      description: product?.shortDescription || "Browse premium fashion products at BD Collection.",
+      images: product?.imageUrl ? [{ url: product.imageUrl, alt: product.name }] : undefined,
+    },
+  });
 
   if (isLoading) {
     return (

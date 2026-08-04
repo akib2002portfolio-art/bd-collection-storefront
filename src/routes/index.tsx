@@ -5,14 +5,22 @@ import { ShopByCategory } from "../features/home/components/ShopByCategory";
 import { FeaturedProducts } from "../features/home/components/FeaturedProducts";
 import { NewArrivals } from "../features/home/components/NewArrivals";
 import { AboutPreview } from "../features/home/components/AboutPreview";
-import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import { useSeoMetadata } from "../hooks/useSeoMetadata";
 
 export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
 function HomePage() {
-  useDocumentTitle();
+  useSeoMetadata({
+    title: "BD Collection | Premium Fashion Store",
+    description: "Discover premium apparel and elevated style at BD Collection. Shop featured items, new arrivals, and curated categories.",
+    canonical: "/",
+    openGraph: {
+      title: "BD Collection | Premium Fashion Store",
+      description: "Discover premium apparel and elevated style at BD Collection. Shop featured items, new arrivals, and curated categories.",
+    },
+  });
 
   return (
     <>

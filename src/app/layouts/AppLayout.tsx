@@ -5,7 +5,9 @@ import { useRouterState } from "@tanstack/react-router";
 import { Header } from "../../components/layout/Header";
 import { Footer } from "../../components/layout/Footer";
 import { LoadingScreen } from "../../components/layout/LoadingScreen";
+import { SeoProvider } from "../../components/providers/SeoProvider";
 import { SiteBrandingProvider } from "../../components/providers/SiteBrandingProvider";
+import { AnalyticsProvider } from "../../components/providers/AnalyticsProvider";
 import { useSiteSettings } from "../../features/settings/hooks";
 
 export default function AppLayout({
@@ -35,8 +37,9 @@ export default function AppLayout({
   }, []);
 
   return (
-    <>
+    <SeoProvider>
       <SiteBrandingProvider />
+      <AnalyticsProvider />
 
       <LoadingScreen isLoading={isLoading} />
 
@@ -61,6 +64,6 @@ export default function AppLayout({
           <Footer />
         </div>
       )}
-    </>
+    </SeoProvider>
   );
 }
