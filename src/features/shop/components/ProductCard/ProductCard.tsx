@@ -11,20 +11,27 @@ interface ProductCardProps {
   product: Product;
   aspect?: string;
   className?: string;
+  index?: number;
 }
 
 export function ProductCard({
   product,
   aspect = "4/5",
   className,
+  index = 0,
 }: ProductCardProps) {
   return (
     <motion.article
-      layout
-      className={cn(
-        "group relative overflow-hidden rounded-2xl",
-        className,
-      )}
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{
+        duration: 0.5,
+        delay: Math.min(index, 6) * 0.06,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      whileTap={{ scale: 0.97 }}
+      className={cn("group relative overflow-hidden rounded-2xl", className)}
     >
       <Link
         to="/product/$slug"
@@ -50,19 +57,17 @@ export function ProductCard({
             </div>
           )}
 
-          <motion.div
-            whileHover={{ scale: 1.06 }}
-            transition={{
-              duration: 0.7,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
+          <div className="overflow-hidden">
             {product.imageUrl ? (
               <img
                 src={product.imageUrl}
                 alt={product.name}
                 loading="lazy"
-                className="aspect-[4/5] w-full object-cover"
+                className={cn(
+                  "aspect-[4/5] w-full object-cover",
+                  "transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                  "group-hover:scale-[1.06]",
+                )}
               />
             ) : (
               <PlaceholderImage
@@ -70,18 +75,21 @@ export function ProductCard({
                 aspect={aspect}
               />
             )}
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={false}
-            whileHover={{ opacity: 1 }}
-            transition={{
-              duration: 0.25,
-            }}
-            className="absolute inset-0 bg-black/15 opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
+          <div
+            className={cn(
+              "absolute inset-0 bg-black/0 transition-colors duration-300",
+              "group-hover:bg-black/15",
+            )}
           />
 
-          <div className="absolute inset-x-4 bottom-4 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+          <div
+            className={cn(
+              "absolute inset-x-4 bottom-4 opacity-100 translate-y-0 transition-all duration-300",
+              "lg:opacity-0 lg:translate-y-3 lg:group-hover:opacity-100 lg:group-hover:translate-y-0",
+            )}
+          >
             <div className="flex h-11 items-center justify-center rounded-xl bg-white font-medium text-sm shadow-lg">
               View Details
             </div>

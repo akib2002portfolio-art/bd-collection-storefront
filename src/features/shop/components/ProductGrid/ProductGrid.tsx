@@ -29,10 +29,11 @@ export function ProductGrid({
         className,
       )}
     >
-      {products.map((product) => (
+      {products.map((product, index) => (
         <ProductCard
           key={product.id}
           product={product}
+          index={index}
         />
       ))}
     </div>

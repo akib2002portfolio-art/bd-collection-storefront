@@ -1,9 +1,7 @@
 import { motion } from "framer-motion";
 
+import { ProductGrid } from "../../../shop/components/ProductGrid";
 import { useFeaturedProducts } from "../../../shop/hooks/useFeaturedProducts";
-import { mapProductsToPreview } from "../../utils/productPreviewMapper";
-
-import { ProductGrid } from "./ProductGrid";
 
 export function FeaturedProducts() {
   const {
@@ -12,8 +10,6 @@ export function FeaturedProducts() {
     isError,
     error,
   } = useFeaturedProducts();
-
-  const previewProducts = mapProductsToPreview(products);
 
   return (
     <section className="py-24">
@@ -56,9 +52,7 @@ export function FeaturedProducts() {
           </div>
         )}
 
-        {!isLoading && !isError && (
-          <ProductGrid products={previewProducts} />
-        )}
+        {!isLoading && !isError && <ProductGrid products={products} />}
       </div>
     </section>
   );

@@ -1,10 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
+import { ProductGrid } from "../../../shop/components/ProductGrid";
 import { useNewArrivals } from "../../../shop/hooks/useNewArrivals";
-import { mapProductsToPreview } from "../../utils/productPreviewMapper";
-
-import { ProductGrid } from "../FeaturedProducts/ProductGrid";
 
 export function NewArrivals() {
   const {
@@ -13,8 +11,6 @@ export function NewArrivals() {
     isError,
     error,
   } = useNewArrivals();
-
-  const previewProducts = mapProductsToPreview(products);
 
   return (
     <section className="py-24">
@@ -60,9 +56,7 @@ export function NewArrivals() {
           </div>
         )}
 
-        {!isLoading && !isError && (
-          <ProductGrid products={previewProducts} />
-        )}
+        {!isLoading && !isError && <ProductGrid products={products} />}
       </div>
     </section>
   );
