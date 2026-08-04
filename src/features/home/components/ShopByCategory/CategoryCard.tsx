@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -8,9 +9,9 @@ interface CategoryCardProps {
   category: CategoryCardData;
 }
 
-export function CategoryCard({ category }: CategoryCardProps) {
+export const CategoryCard = memo(function CategoryCard({ category }: CategoryCardProps) {
   return (
-    <Link to="/shop/$slug" params={{ slug: category.slug }} className="group block">
+    <Link to="/shop/$slug" params={{ slug: category.slug }} preload="intent" className="group block">
       <motion.article
         whileHover={{ y: -6 }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
@@ -19,6 +20,10 @@ export function CategoryCard({ category }: CategoryCardProps) {
         <motion.img
           src={category.image}
           alt={category.name}
+          width={800}
+          height={1000}
+          loading="lazy"
+          decoding="async"
           className="absolute inset-0 h-full w-full object-cover"
           animate={{ scale: [1, 1.08, 1] }}
           transition={{
@@ -52,4 +57,4 @@ export function CategoryCard({ category }: CategoryCardProps) {
       </motion.article>
     </Link>
   );
-}
+});

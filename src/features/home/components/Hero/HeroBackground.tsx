@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { HERO_ANIMATION } from "./constants";
@@ -7,7 +8,7 @@ interface HeroBackgroundProps {
   slide: HeroSlide;
 }
 
-export function HeroBackground({
+export const HeroBackground = memo(function HeroBackground({
   slide,
 }: HeroBackgroundProps) {
   return (
@@ -39,7 +40,12 @@ export function HeroBackground({
       >
         <img
           src={slide.image}
-          alt={slide.title}
+          alt={`${slide.title} hero image`}
+          width={1600}
+          height={900}
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
           className="h-full w-full object-cover"
           draggable={false}
         />
@@ -48,4 +54,4 @@ export function HeroBackground({
       </motion.div>
     </AnimatePresence>
   );
-}
+});

@@ -14,6 +14,10 @@ function AboutPage() {
     title: "About | BD Collection",
     description: "Learn about BD Collection's story, mission, and vision. Discover premium fashion crafted for modern lifestyles.",
     canonical: "/about",
+    breadcrumbs: [
+      { name: "Home", url: "/" },
+      { name: "About" },
+    ],
   });
 
   const {
@@ -97,7 +101,11 @@ function AboutPage() {
                 about.heroImage ??
                 "/images/about/about-preview.jpg"
               }
-              alt={about.title}
+              alt={`${about.title} story and mission`}
+              width={1200}
+              height={1500}
+              loading="lazy"
+              decoding="async"
               className="aspect-[4/5] w-full rounded-3xl object-cover"
             />
 
@@ -162,7 +170,11 @@ function AboutPage() {
                 about.secondaryImage ??
                 "/images/about/about-secondary.jpg"
               }
-              alt="Our Story"
+              alt={`${about.title} fashion story`}
+              width={1600}
+              height={900}
+              loading="lazy"
+              decoding="async"
               className="h-[600px] w-full object-cover"
             />
 

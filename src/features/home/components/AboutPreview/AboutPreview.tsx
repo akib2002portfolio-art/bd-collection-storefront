@@ -1,9 +1,10 @@
+import { memo } from "react";
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
 import { useAbout } from "../../../about/hooks";
 
-export function AboutPreview() {
+export const AboutPreview = memo(function AboutPreview() {
   const { data: about, isLoading } = useAbout();
 
   if (isLoading) {
@@ -15,7 +16,6 @@ export function AboutPreview() {
       </section>
     );
   }
-
   return (
     <section className="py-24">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-2 lg:items-center">
@@ -57,10 +57,14 @@ export function AboutPreview() {
               "/images/about/about-preview.jpg"
             }
             alt={about?.title ?? "About BD Collection"}
+            width={1200}
+            height={900}
+            loading="lazy"
+            decoding="async"
             className="aspect-[4/3] w-full rounded-3xl object-cover"
           />
         </motion.div>
       </div>
     </section>
   );
-}
+});

@@ -22,6 +22,24 @@ function ProductDetailsPage() {
     title: product ? `${product.name} | BD Collection` : "Product | BD Collection",
     description: product?.shortDescription || "Browse premium fashion products at BD Collection.",
     canonical: product ? `/product/${product.slug}` : `/product/${slug}`,
+    breadcrumbs: [
+      { name: "Home", url: "/" },
+      { name: "Shop", url: "/shop" },
+      { name: product ? product.name : "Product" },
+    ],
+    product: product
+      ? {
+          name: product.name,
+          description: product.shortDescription || product.description,
+          image: product.imageUrl,
+          sku: product.sku,
+          category: product.categoryName,
+          price: product.price,
+          currency: product.currency,
+          availability: product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+          url: `/product/${product.slug}`,
+        }
+      : undefined,
     openGraph: {
       title: product ? `${product.name} | BD Collection` : "BD Collection Product",
       description: product?.shortDescription || "Browse premium fashion products at BD Collection.",
