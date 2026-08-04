@@ -5,7 +5,7 @@ import { createClient } from "@supabase/supabase-js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const baseUrl = process.env.VITE_PUBLIC_SITE_URL || "https://www.bdcollection.com";
+const baseUrl = process.env.VITE_PUBLIC_SITE_URL || "https://www.bd-collection.com";
 const outputPath = path.join(__dirname, "..", "public", "sitemap.xml");
 
 const staticRoutes = [

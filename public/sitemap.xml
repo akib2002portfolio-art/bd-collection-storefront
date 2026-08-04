@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.bdcollection.com/</loc>
+    <loc>https://www.bd-collection.com/</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bdcollection.com/shop</loc>
+    <loc>https://www.bd-collection.com/shop</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bdcollection.com/shop/all</loc>
+    <loc>https://www.bd-collection.com/shop/all</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bdcollection.com/about</loc>
+    <loc>https://www.bd-collection.com/about</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bdcollection.com/contact</loc>
+    <loc>https://www.bd-collection.com/contact</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
