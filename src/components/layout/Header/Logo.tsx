@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { useSiteSettings } from "../../../features/settings/hooks";
 import { useHeaderTheme } from "./HeaderContext";
@@ -21,19 +20,6 @@ export function Logo() {
 
   const logoUrl =
     settings?.logoUrl || "";
-
-  useEffect(() => {
-    if (!logoUrl) return;
-
-    const existingLink = document.head.querySelector(`link[rel="preload"][href="${logoUrl}"]`);
-    if (existingLink) return;
-
-    const link = document.createElement("link");
-    link.rel = "preload";
-    link.as = "image";
-    link.href = logoUrl;
-    document.head.appendChild(link);
-  }, [logoUrl]);
 
   return (
     <Link
@@ -61,10 +47,6 @@ export function Logo() {
           <img
             src={logoUrl}
             alt={storeName}
-            width={56}
-            height={56}
-            loading="eager"
-            decoding="async"
             className="max-h-12 max-w-12 object-contain"
           />
         </div>

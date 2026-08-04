@@ -12,10 +12,6 @@ function ShopPage() {
     title: "Shop | BD Collection",
     description: "Shop curated fashion collections and premium garments at BD Collection. Browse categories, featured products, and new arrivals.",
     canonical: "/shop",
-    breadcrumbs: [
-      { name: "Home", url: "/" },
-      { name: "Shop" },
-    ],
     openGraph: {
       title: "Shop | BD Collection",
       description: "Shop curated fashion collections and premium garments at BD Collection.",

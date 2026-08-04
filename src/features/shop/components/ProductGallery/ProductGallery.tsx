@@ -47,10 +47,6 @@ export function ProductGallery({
               <img
                 src={src}
                 alt={`${productName} ${index + 1}`}
-                width={240}
-                height={300}
-                loading="lazy"
-                decoding="async"
                 className="aspect-[4/5] h-full w-full object-cover"
               />
             </button>
@@ -87,10 +83,6 @@ export function ProductGallery({
               <img
                 src={gallery[current]}
                 alt={productName}
-                width={1200}
-                height={1500}
-                loading="eager"
-                decoding="async"
                 className="aspect-[4/5] w-full object-cover"
               />
             ) : (

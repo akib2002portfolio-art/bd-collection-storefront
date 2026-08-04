@@ -13,10 +13,6 @@ function ContactRoutePage() {
     title: "Contact Us | BD Collection",
     description: "Get in touch with BD Collection for orders, support, and inquiries. We're here to help with your fashion needs.",
     canonical: "/contact",
-    breadcrumbs: [
-      { name: "Home", url: "/" },
-      { name: "Contact" },
-    ],
   });
 
   return <ContactPage />;

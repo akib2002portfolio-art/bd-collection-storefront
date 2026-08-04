@@ -72,7 +72,6 @@ export function SearchOverlay({ open, onClose }: SearchOverlayProps) {
               <button
                 type="button"
                 onClick={onClose}
-                aria-label="Close search"
                 className="rounded-full p-2 transition hover:bg-muted"
               >
                 <X className="h-5 w-5" />
@@ -87,7 +86,6 @@ export function SearchOverlay({ open, onClose }: SearchOverlayProps) {
                   autoFocus
                   value={keyword}
                   onChange={(e) => setKeyword(e.target.value)}
-                  aria-label="Search products"
                   placeholder="Search by product, SKU or category..."
                   className="flex-1 bg-transparent text-base outline-none placeholder:text-muted-foreground"
                 />
@@ -134,10 +132,6 @@ export function SearchOverlay({ open, onClose }: SearchOverlayProps) {
                       <img
                         src={product.imageUrl}
                         alt={product.name}
-                        width={80}
-                        height={80}
-                        loading="lazy"
-                        decoding="async"
                         className="h-20 w-20 rounded-lg object-cover"
                       />
 

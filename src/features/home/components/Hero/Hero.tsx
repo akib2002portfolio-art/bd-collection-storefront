@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 
 import { HeroBackground } from "./HeroBackground";
 import { HeroContent } from "./HeroContent";
@@ -56,20 +56,6 @@ export function Hero() {
 
   const currentSlide =
     heroSlides[currentIndex];
-
-  useEffect(() => {
-    if (!currentSlide?.image) return;
-
-    const existingLink = document.head.querySelector(`link[rel="preload"][href="${currentSlide.image}"]`);
-    if (existingLink) return;
-
-    const link = document.createElement("link");
-    link.rel = "preload";
-    link.as = "image";
-    link.href = currentSlide.image;
-    link.fetchPriority = "high";
-    document.head.appendChild(link);
-  }, [currentSlide?.image]);
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-black text-white">

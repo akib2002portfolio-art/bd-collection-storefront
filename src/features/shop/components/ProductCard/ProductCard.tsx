@@ -1,4 +1,3 @@
-import { memo } from "react";
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
@@ -15,7 +14,7 @@ interface ProductCardProps {
   index?: number;
 }
 
-export const ProductCard = memo(function ProductCard({
+export function ProductCard({
   product,
   aspect = "4/5",
   className,
@@ -39,7 +38,6 @@ export const ProductCard = memo(function ProductCard({
         params={{
           slug: product.slug,
         }}
-        preload="intent"
         className="block"
       >
         <div className="relative overflow-hidden rounded-2xl bg-muted">
@@ -64,10 +62,7 @@ export const ProductCard = memo(function ProductCard({
               <img
                 src={product.imageUrl}
                 alt={product.name}
-                width={800}
-                height={1000}
                 loading="lazy"
-                decoding="async"
                 className={cn(
                   "aspect-[4/5] w-full object-cover",
                   "transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
@@ -119,4 +114,4 @@ export const ProductCard = memo(function ProductCard({
       </Link>
     </motion.article>
   );
-});
+}
