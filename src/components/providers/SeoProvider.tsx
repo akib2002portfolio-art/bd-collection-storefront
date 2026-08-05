@@ -1,9 +1,10 @@
 import { createContext, useContext, useEffect, useMemo, useState, type PropsWithChildren } from "react";
+import { useRouterState } from "@tanstack/react-router";
 
 import { useSiteSettings } from "../../features/settings/hooks";
 import { buildMetadata, buildJsonLd, type SeoMetadata } from "../../lib/seo";
 
-const BASE_URL = import.meta.env.VITE_PUBLIC_SITE_URL || "https://www.bdcollection.com";
+const BASE_URL = import.meta.env.VITE_PUBLIC_SITE_URL || "https://www.bd-collection.com";
 
 interface SeoContextValue {
   setMetadata: (metadata: SeoMetadata) => void;
@@ -14,6 +15,9 @@ const SeoContext = createContext<SeoContextValue | null>(null);
 
 export function SeoProvider({ children }: PropsWithChildren) {
   const { data: settings } = useSiteSettings();
+  const pathname = useRouterState({
+    select: (state) => state.location.pathname,
+  });
   const [metadata, setMetadata] = useState<SeoMetadata>({});
 
   const value = useMemo(
@@ -29,10 +33,21 @@ export function SeoProvider({ children }: PropsWithChildren) {
     const defaultDescription = settings?.seoDescription || settings?.description || "Premium fashion for modern wardrobes.";
     const defaultImage = settings?.seoImage || `${BASE_URL}/og-image.svg`;
 
+    const resolveUrl = (value: string) =>
+      new URL(value, BASE_URL).href;
+
+    const canonical = metadata.canonical
+      ? resolveUrl(metadata.canonical)
+      : resolveUrl(pathname || "/");
+
+    const openGraphUrl = metadata.openGraph?.url
+      ? resolveUrl(metadata.openGraph.url)
+      : canonical;
+
     const seoMetadata: SeoMetadata = {
       title: metadata.title || defaultTitle,
       description: metadata.description || defaultDescription,
-      canonical: metadata.canonical || BASE_URL,
+      canonical,
       themeColor: metadata.themeColor || "#000000",
       applicationName: settings?.storeName || "BD Collection",
       author: metadata.author || "BD Collection",
@@ -40,7 +55,7 @@ export function SeoProvider({ children }: PropsWithChildren) {
       openGraph: {
         title: metadata.openGraph?.title || metadata.title || defaultTitle,
         description: metadata.openGraph?.description || metadata.description || defaultDescription,
-        url: metadata.openGraph?.url || metadata.canonical || BASE_URL,
+        url: openGraphUrl,
         type: metadata.openGraph?.type || "website",
         siteName: settings?.storeName || "BD Collection",
         images:
