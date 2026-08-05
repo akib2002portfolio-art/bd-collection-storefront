@@ -41,7 +41,7 @@ export function AboutPreview() {
             to="/about"
             className="mt-8 inline-flex rounded-full bg-black px-6 py-3 text-sm font-medium text-white transition hover:opacity-90"
           >
-            Learn More
+            Learn more about BD Collection
           </Link>
         </motion.div>
 

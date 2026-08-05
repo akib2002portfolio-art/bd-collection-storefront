@@ -154,6 +154,7 @@ export function Footer() {
                   href={settings.facebook}
                   target="_blank"
                   rel="noreferrer"
+                  aria-label={`Visit ${settings?.storeName ?? "BD Collection"} on Facebook`}
                   className="rounded-full border border-white/15 p-3 transition hover:bg-white hover:text-black"
                 >
                   <FaFacebookF className="h-5 w-5" />
@@ -165,6 +166,7 @@ export function Footer() {
                   href={settings.instagram}
                   target="_blank"
                   rel="noreferrer"
+                  aria-label={`Visit ${settings?.storeName ?? "BD Collection"} on Instagram`}
                   className="rounded-full border border-white/15 p-3 transition hover:bg-white hover:text-black"
                 >
                   <FaInstagram className="h-5 w-5" />
@@ -176,6 +178,7 @@ export function Footer() {
                   href={settings.linkedin}
                   target="_blank"
                   rel="noreferrer"
+                  aria-label={`Visit ${settings?.storeName ?? "BD Collection"} on LinkedIn`}
                   className="rounded-full border border-white/15 p-3 transition hover:bg-white hover:text-black"
                 >
                   <FaLinkedinIn className="h-5 w-5" />
@@ -187,6 +190,7 @@ export function Footer() {
                   href={settings.youtube}
                   target="_blank"
                   rel="noreferrer"
+                  aria-label={`Visit ${settings?.storeName ?? "BD Collection"} on YouTube`}
                   className="rounded-full border border-white/15 p-3 transition hover:bg-white hover:text-black"
                 >
                   <FaYoutube className="h-5 w-5" />
@@ -198,6 +202,7 @@ export function Footer() {
                   href={settings.whatsapp}
                   target="_blank"
                   rel="noreferrer"
+                  aria-label={`Chat with ${settings?.storeName ?? "BD Collection"} on WhatsApp`}
                   className="rounded-full border border-white/15 p-3 transition hover:bg-white hover:text-black"
                 >
                   <MessageCircle className="h-5 w-5" />
