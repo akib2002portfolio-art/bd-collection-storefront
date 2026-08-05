@@ -43,10 +43,6 @@ export function ProductForm({
         categories,
         loading: categoriesLoading,
     } = useCategories();
-    console.log("Hook categories:", categories);
-    console.log("Loading:", categoriesLoading);
-    console.log("Categories Hook:", categories);
-    console.log("Categories:", categories);
     useEffect(() => {
         if (!initialData) return;
 

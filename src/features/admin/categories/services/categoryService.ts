@@ -24,9 +24,6 @@ class CategoryService {
       ascending: true,
     });
 
-  console.log("Categories data:", data);
-  console.log("Categories error:", error);
-
   if (error) {
     throw new Error(error.message);
   }

@@ -78,7 +78,6 @@ async function main() {
     .join("\n")}\n</urlset>`;
 
   fs.writeFileSync(outputPath, sitemap, "utf-8");
-  console.log(`Generated sitemap with ${urls.length} URLs to ${outputPath}`);
 }
 
 main().catch((error) => {
