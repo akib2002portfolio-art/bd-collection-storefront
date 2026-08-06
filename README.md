@@ -98,25 +98,25 @@ The application follows a scalable component-driven architecture and is optimize
 
 ---
 
-## Shop
+## Admin Dashboard
 
 <img width="1919" height="1031" src="https://github.com/user-attachments/assets/3945f6d6-dd19-43ab-8a30-21ae0cbff4c6">
 
 ---
 
-## Search
+## Product Add
 
 <img width="1919" height="1020" src="https://github.com/user-attachments/assets/22076e12-7bf0-4a7a-8bdb-eb70dfc1074d">
 
 ---
 
-## Admin Dashboard
+## Category Add
 
 <img width="1919" height="1031" src="https://github.com/user-attachments/assets/45a18e91-348a-49d7-8770-0cd6492891f0">
 
 ---
 
-## CMS
+## Contact Form
 
 <img width="1919" height="1030" src="https://github.com/user-attachments/assets/2d0d6373-5891-493b-87d7-63f51983bd64">
 
