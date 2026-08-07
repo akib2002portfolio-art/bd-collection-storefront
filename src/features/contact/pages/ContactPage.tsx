@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { Route } from "../../../routes/contact";
 
 import { ContactHero } from "../components/ContactHero";
@@ -10,12 +11,29 @@ import { useProductById } from "../../shop/hooks/useProductById";
 
 export function ContactPage() {
   const { productId = "" } = Route.useSearch();
+  const inquirySectionRef = useRef<HTMLDivElement | null>(null);
 
   const {
     data: product,
     isLoading,
     isError,
   } = useProductById(productId);
+
+  useEffect(() => {
+    if (!productId || !inquirySectionRef.current) {
+      return;
+    }
+
+    if (isLoading) {
+      return;
+    }
+
+    const element = inquirySectionRef.current;
+    const headerOffset = 96;
+    const top = element.getBoundingClientRect().top + window.scrollY - headerOffset;
+
+    window.scrollTo({ top, behavior: "smooth" });
+  }, [productId, isLoading, product]);
 
   return (
     <main className="bg-background">
@@ -63,9 +81,11 @@ export function ContactPage() {
                 <ProductInquiryCard product={product} />
               )}
 
-              <ContactForm
-                productId={product ? product.id : undefined}
-              />
+              <div ref={inquirySectionRef} id="product-inquiry" className="scroll-mt-28">
+                <ContactForm
+                  productId={product ? product.id : undefined}
+                />
+              </div>
             </div>
 
             <div className="h-fit xl:sticky xl:top-28">

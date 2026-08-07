@@ -18,6 +18,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
       search: {
         productId: product.id,
       },
+      hash: "product-inquiry",
     });
   }
 
@@ -82,8 +83,8 @@ export function ProductInfo({ product }: ProductInfoProps) {
               }
             >
               {isInStock
-                ? "In Stock"
-                : "Out of Stock"}
+                ? "Available"
+                : "Not Available"}
             </span>
           </div>
         </div>
