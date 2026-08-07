@@ -71,7 +71,7 @@ export function Footer() {
                   to="/shop"
                   className="transition hover:text-white"
                 >
-                  Shop
+                  Products
                 </Link>
               </li>
 

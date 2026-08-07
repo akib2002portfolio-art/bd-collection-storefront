@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { HERO_ROUTE_OPTIONS } from "../../constants/routes";
+import { useCategories } from "../../../shop/hooks/useCategories";
+import { createHeroRouteOptions } from "../../constants/routes";
 import { HeroImageUpload } from "../HeroImageUpload/HeroImageUpload";
 
 import type { HeroSlide, HeroSlideFormData } from "../../types";
@@ -48,6 +49,10 @@ export function HeroSlideForm({
       isActive: true,
     },
   });
+
+  const { data: categories = [] } = useCategories();
+
+  const heroRouteOptions = createHeroRouteOptions(categories);
 
   useEffect(() => {
     if (!initialValues) return;
@@ -145,7 +150,7 @@ export function HeroSlideForm({
             {...register("buttonLink")}
             className="w-full rounded-md border px-3 py-2"
           >
-            {HERO_ROUTE_OPTIONS.map((route) => (
+            {heroRouteOptions.map((route) => (
               <option
                 key={route.value}
                 value={route.value}

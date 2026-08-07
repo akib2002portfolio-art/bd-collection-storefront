@@ -80,7 +80,7 @@ export function MobileMenu({
               <div className="space-y-6">
                 <div>
                   <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                    Shop
+                    Products
                   </p>
 
                   <div className="flex flex-col gap-3">

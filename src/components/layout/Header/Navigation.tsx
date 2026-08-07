@@ -103,7 +103,7 @@ export function Navigation() {
           to="/shop"
           className={navClass(isShopActive)}
         >
-          Shop
+          Products
 
           <ChevronDown
             className={[
