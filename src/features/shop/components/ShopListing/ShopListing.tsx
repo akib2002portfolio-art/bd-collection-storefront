@@ -67,7 +67,7 @@ export function ShopListing() {
             href: "/",
           },
           {
-            label: "Shop",
+            label: "Products",
           },
         ]}
         showBreadcrumbs

@@ -18,7 +18,7 @@ export const footerData = {
 
 export const footerNavigation = [
   {
-    title: "Shop",
+    title: "Products",
     links: [
       { label: "New Arrival", href: "/shop?category=new-arrival" },
       { label: "Men", href: "/shop?category=men" },

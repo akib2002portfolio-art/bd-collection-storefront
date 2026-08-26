@@ -72,7 +72,7 @@ function AboutPage() {
                 to="/shop"
                 className="rounded-full bg-black px-6 py-3 text-white"
               >
-                Shop Now
+                View Products
               </Link>
 
               <Link
@@ -198,7 +198,7 @@ function AboutPage() {
                     to="/shop"
                     className="rounded-full bg-white px-7 py-3 font-medium text-black transition hover:bg-neutral-100"
                   >
-                    Shop Collection
+                    Product Collection
                   </Link>
 
                   <Link

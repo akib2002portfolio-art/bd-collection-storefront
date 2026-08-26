@@ -59,7 +59,7 @@ export function ShopLanding() {
           </p>
 
           <h2 className="mt-3 text-3xl font-bold tracking-tight">
-            Shop by Category
+            Product by Category
           </h2>
         </div>
 

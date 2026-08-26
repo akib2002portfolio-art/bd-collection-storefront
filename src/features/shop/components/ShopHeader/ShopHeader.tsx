@@ -27,7 +27,7 @@ interface ShopHeaderProps {
 }
 
 export function ShopHeader({
-  eyebrow = "Shop",
+  eyebrow = "Products",
   title,
   description,
   productCount,

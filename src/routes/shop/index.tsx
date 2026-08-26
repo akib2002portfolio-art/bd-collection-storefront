@@ -9,12 +9,12 @@ export const Route = createFileRoute("/shop/")({
 
 function ShopPage() {
   useSeoMetadata({
-    title: "Shop | BD Collection",
-    description: "Shop curated fashion collections and premium garments at BD Collection. Browse categories, featured products, and new arrivals.",
+    title: "Products | BD Collection",
+    description: "Browse curated fashion collections and premium garments at BD Collection. Explore categories, featured products, and new arrivals.",
     canonical: "/shop",
     openGraph: {
-      title: "Shop | BD Collection",
-      description: "Shop curated fashion collections and premium garments at BD Collection.",
+      title: "Products | BD Collection",
+      description: "Browse curated fashion collections and premium garments at BD Collection.",
     },
   });
 

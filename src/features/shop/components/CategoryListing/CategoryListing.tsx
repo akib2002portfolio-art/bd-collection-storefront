@@ -71,7 +71,7 @@ export function CategoryListing({
             href: "/",
           },
           {
-            label: "Shop",
+            label: "Products",
             href: "/shop",
           },
           {

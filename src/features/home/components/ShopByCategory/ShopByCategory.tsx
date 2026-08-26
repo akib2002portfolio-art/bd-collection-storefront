@@ -61,7 +61,7 @@ export function ShopByCategory() {
           </p>
 
           <h2 className="mt-4 text-4xl font-bold tracking-tight">
-            Shop by Category
+            Product by Category
           </h2>
 
           <p className="mt-4 text-muted-foreground">

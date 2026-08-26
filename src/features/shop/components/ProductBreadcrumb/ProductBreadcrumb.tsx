@@ -27,7 +27,7 @@ export function ProductBreadcrumb({
         to="/shop"
         className="transition-colors hover:text-foreground"
       >
-        Shop
+        Products
       </Link>
 
       <span>/</span>

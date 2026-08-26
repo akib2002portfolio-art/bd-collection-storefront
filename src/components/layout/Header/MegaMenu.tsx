@@ -40,7 +40,7 @@ export function MegaMenu({
             </p>
 
             <h3 className="mt-3 text-2xl font-bold">
-              Shop Collection
+              Product Collection
             </h3>
 
             <p className="mt-3 text-sm leading-7 text-muted-foreground">

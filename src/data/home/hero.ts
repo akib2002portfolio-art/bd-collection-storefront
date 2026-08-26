@@ -8,7 +8,7 @@ export const heroSlides: HeroSlide[] = [
     description:
       "Discover premium apparel crafted for comfort, confidence, and timeless fashion.",
     image: "/images/hero/hero-1.webp",
-    ctaLabel: "Shop Collection",
+    ctaLabel: "Product Collection",
     ctaHref: "/shop",
   },
   {
